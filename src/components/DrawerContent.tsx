@@ -10,7 +10,7 @@ import {
   IconButton,
   useTheme
 } from '@mui/material';
-import { Home, LogIn, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Home, LogIn, ChevronLeft, ChevronRight, Grid as GridIcon, Table as TableIcon } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Copyright from './Copyright';
 
@@ -26,6 +26,8 @@ export default function DrawerContent({ isDrawerOpen, toggleDrawer }: DrawerCont
 
   const menuItems = [
     { text: 'Home', icon: <Home />, path: '/' },
+    { text: 'Grid', icon: <GridIcon />, path: '/grid' },
+    { text: 'Table', icon: <TableIcon />, path: '/table' },
     { text: 'Login', icon: <LogIn />, path: '/login' }
   ];
 

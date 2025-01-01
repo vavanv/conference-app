@@ -5,11 +5,13 @@ import { createTheme } from '@mui/material/styles';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Grid from './pages/Grid';
+import Table from './pages/Table';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#9e9e9e', // Light gray color
+      main: '#9e9e9e',
       light: '#cfcfcf',
       dark: '#707070',
     },
@@ -19,7 +21,7 @@ const theme = createTheme({
   },
 });
 
-function App() {
+export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -28,11 +30,11 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/grid" element={<Grid />} />
+            <Route path="/table" element={<Table />} />
           </Routes>
         </Layout>
       </BrowserRouter>
     </ThemeProvider>
   );
 }
-
-export default App;
