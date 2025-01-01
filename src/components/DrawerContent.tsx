@@ -32,7 +32,7 @@ export default function DrawerContent({ isDrawerOpen, toggleDrawer }: DrawerCont
   ];
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <>
       <Toolbar sx={{ 
         display: 'flex', 
         alignItems: 'center', 
@@ -43,7 +43,7 @@ export default function DrawerContent({ isDrawerOpen, toggleDrawer }: DrawerCont
           {isDrawerOpen ? <ChevronLeft /> : <ChevronRight />}
         </IconButton>
       </Toolbar>
-      <List>
+      <List sx={{ flex: '0 1 auto', overflowY: 'auto' }}>
         {menuItems.map((item) => (
           <ListItem key={item.text} disablePadding>
             <ListItemButton 
@@ -82,6 +82,6 @@ export default function DrawerContent({ isDrawerOpen, toggleDrawer }: DrawerCont
         ))}
       </List>
       <Copyright isDrawerOpen={isDrawerOpen} />
-    </Box>
+    </>
   );
 }
