@@ -38,5 +38,13 @@ export function useTableData() {
     );
   };
 
-  return { data, isLoading, sortConfig, handleSort };
+  const updateRecord = (updatedRecord: TableData) => {
+    setData(current =>
+      current.map(record =>
+        record.id === updatedRecord.id ? updatedRecord : record
+      )
+    );
+  };
+
+  return { data, isLoading, sortConfig, handleSort, updateRecord };
 }
