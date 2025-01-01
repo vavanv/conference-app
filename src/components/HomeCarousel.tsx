@@ -5,7 +5,7 @@ import { carouselItems } from '../config/carouselItems';
 
 export default function HomeCarousel() {
   return (
-    <Box sx={{ height: 'calc(100vh - 84px)' }}> {/* Adjusted for AppBar height */}
+    <Box sx={{ height: 'calc(100vh - 84px)' }}>
       <Carousel
         animation="slide"
         interval={5000}
@@ -26,11 +26,11 @@ export default function HomeCarousel() {
             sx={{
               position: 'relative',
               height: '100%',
-              backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${item.image})`,
+              backgroundImage: `url(${item.image})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
-              borderRadius: 2
+              borderRadius: 0
             }}
           >
             <Box
@@ -39,15 +39,15 @@ export default function HomeCarousel() {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                p: 4,
                 background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
-                borderRadius: '0 0 8px 8px'
+                p: 4,
+                color: 'white'
               }}
             >
-              <Typography variant="h4" color="common.white" gutterBottom>
+              <Typography variant="h4" gutterBottom>
                 {item.title}
               </Typography>
-              <Typography variant="subtitle1" color="common.white">
+              <Typography variant="subtitle1">
                 {item.description}
               </Typography>
             </Box>
