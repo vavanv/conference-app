@@ -1,6 +1,5 @@
 import React from 'react';
 import { 
-  Box, 
   Toolbar, 
   List, 
   ListItem, 
@@ -32,7 +31,11 @@ export default function DrawerContent({ isDrawerOpen, toggleDrawer }: DrawerCont
   ];
 
   return (
-    <>
+    <div style={{ 
+      display: 'flex', 
+      flexDirection: 'column', 
+      height: '100%' 
+    }}>
       <Toolbar sx={{ 
         display: 'flex', 
         alignItems: 'center', 
@@ -43,7 +46,7 @@ export default function DrawerContent({ isDrawerOpen, toggleDrawer }: DrawerCont
           {isDrawerOpen ? <ChevronLeft /> : <ChevronRight />}
         </IconButton>
       </Toolbar>
-      <List sx={{ flex: '0 1 auto', overflowY: 'auto' }}>
+      <List sx={{ flex: '1 1 auto', overflowY: 'auto' }}>
         {menuItems.map((item) => (
           <ListItem key={item.text} disablePadding>
             <ListItemButton 
@@ -82,6 +85,6 @@ export default function DrawerContent({ isDrawerOpen, toggleDrawer }: DrawerCont
         ))}
       </List>
       <Copyright isDrawerOpen={isDrawerOpen} />
-    </>
+    </div>
   );
 }
