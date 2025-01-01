@@ -9,10 +9,9 @@ export const loginSchema = yup.object({
     .string()
     .required('Password is required')
     .min(8, 'Password must be at least 8 characters')
-    .max(50, 'Password must not exceed 50 characters')
     .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
-      'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&#^()_+=[\]{}|\\,./<>:;~-]+$/,
+      'Password must contain at least one uppercase letter, one lowercase letter, and one number'
     )
 });
 
