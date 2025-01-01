@@ -1,18 +1,19 @@
-import { z } from 'zod';
+import * as yup from 'yup';
 
-export const loginSchema = z.object({
-  email: z
+export const loginSchema = yup.object({
+  email: yup
     .string()
-    .min(1, 'Email is required')
+    .required('Email is required')
     .email('Invalid email address'),
-  password: z
+  password: yup
     .string()
+    .required('Password is required')
     .min(8, 'Password must be at least 8 characters')
     .max(50, 'Password must not exceed 50 characters')
-    .regex(
+    .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
       'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
-    ),
+    )
 });
 
-export type LoginFormData = z.infer<typeof loginSchema>;
+export type LoginFormData = yup.InferType<typeof loginSchema>;

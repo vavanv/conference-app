@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import { Eye, EyeOff } from 'lucide-react';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema, LoginFormData } from '../schemas/login';
 
 export default function Login() {
@@ -24,7 +24,7 @@ export default function Login() {
     handleSubmit,
     formState: { errors, isSubmitting }
   } = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
+    resolver: yupResolver(loginSchema),
     mode: 'onBlur'
   });
 
@@ -62,6 +62,7 @@ export default function Login() {
           component="form" 
           onSubmit={handleSubmit(onSubmit)}
           sx={{ mt: 2 }}
+          noValidate
         >
           <TextField
             fullWidth
