@@ -1,14 +1,15 @@
 import React from 'react';
 import { alpha, Toolbar, Typography, IconButton, Tooltip, Badge } from '@mui/material';
-import { Download, Filter } from 'lucide-react';
+import { Download, Filter, UserPlus } from 'lucide-react';
 import { FilterConfig } from '../../types/table';
 
 interface TableToolbarProps {
   onOpenFilter: () => void;
+  onOpenAddEmployee: () => void;
   filters: FilterConfig;
 }
 
-export function TableToolbar({ onOpenFilter, filters }: TableToolbarProps) {
+export function TableToolbar({ onOpenFilter, onOpenAddEmployee, filters }: TableToolbarProps) {
   const activeFiltersCount = Object.keys(filters).reduce((count, key) => {
     if (key === 'salaryRange') {
       return count + (filters.salaryRange?.min ? 1 : 0) + (filters.salaryRange?.max ? 1 : 0);
@@ -33,6 +34,11 @@ export function TableToolbar({ onOpenFilter, filters }: TableToolbarProps) {
       >
         Employee Data
       </Typography>
+      <Tooltip title="Add employee">
+        <IconButton onClick={onOpenAddEmployee}>
+          <UserPlus />
+        </IconButton>
+      </Tooltip>
       <Tooltip title="Filter list">
         <IconButton onClick={onOpenFilter}>
           <Badge 

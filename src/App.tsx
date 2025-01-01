@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Grid from './pages/Grid';
 import Table from './pages/Table';
+import Contacts from './pages/Contacts';
 
 const theme = createTheme({
   palette: {
@@ -32,6 +33,7 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/grid" element={<Grid />} />
             <Route path="/table" element={<Table />} />
+            <Route path="/contacts" element={<Contacts />} />
           </Routes>
         </Layout>
       </BrowserRouter>

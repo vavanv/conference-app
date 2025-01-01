@@ -15,6 +15,7 @@ import { TableToolbar } from './TableToolbar';
 import { TableLoadingSkeleton } from './TableLoadingSkeleton';
 import { EditDrawer } from './EditDrawer';
 import { FilterDrawer } from './FilterDrawer';
+import { AddEmployeeDrawer } from './AddEmployeeDrawer';
 import { TableData } from '../../types/table';
 
 export default function DataTable() {
@@ -22,6 +23,7 @@ export default function DataTable() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [selectedRecord, setSelectedRecord] = useState<TableData | null>(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [isAddEmployeeOpen, setIsAddEmployeeOpen] = useState(false);
   
   const { 
     data, 
@@ -29,6 +31,7 @@ export default function DataTable() {
     sortConfig, 
     filters,
     handleSort, 
+    addEmployee,
     updateRecord,
     handleFilter 
   } = useTableData();
@@ -52,6 +55,7 @@ export default function DataTable() {
     <Paper sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <TableToolbar 
         onOpenFilter={() => setIsFilterOpen(true)}
+        onOpenAddEmployee={() => setIsAddEmployeeOpen(true)}
         filters={filters}
       />
       <TableContainer sx={{ flex: 1 }}>
@@ -137,6 +141,12 @@ export default function DataTable() {
         onClose={() => setIsFilterOpen(false)}
         onApplyFilters={handleFilter}
         currentFilters={filters}
+      />
+
+      <AddEmployeeDrawer
+        open={isAddEmployeeOpen}
+        onClose={() => setIsAddEmployeeOpen(false)}
+        onAdd={addEmployee}
       />
     </Paper>
   );

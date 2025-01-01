@@ -39,6 +39,10 @@ export function useTableData() {
     );
   };
 
+  const addEmployee = (employee: TableData) => {
+    setData(current => [employee, ...current]);
+  };
+
   const updateRecord = (updatedRecord: TableData) => {
     setData(current =>
       current.map(record =>
@@ -77,6 +81,7 @@ export function useTableData() {
     sortConfig, 
     filters,
     handleSort, 
+    addEmployee,
     updateRecord,
     handleFilter
   };
