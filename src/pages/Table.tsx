@@ -4,7 +4,10 @@ import DataTable from '../components/table/DataTable';
 
 export default function Table() {
   return (
-    <Box sx={{ height: 'calc(100vh - 84px)' }}>
+    <Box sx={{ 
+      height: 'calc(100vh - 84px)',
+      overflow: 'hidden'
+    }}>
       <DataTable />
     </Box>
   );

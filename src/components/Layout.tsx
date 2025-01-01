@@ -32,7 +32,7 @@ export default function Layout({ children }: LayoutProps) {
   };
 
   return (
-    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
+    <Box sx={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
       <AppBar 
         position="fixed" 
         sx={{ 
@@ -122,7 +122,9 @@ export default function Layout({ children }: LayoutProps) {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
           }),
-          mt: 8
+          mt: 8,
+          height: 'calc(100vh - 64px)',
+          overflow: 'hidden'
         }}
       >
         {children}
