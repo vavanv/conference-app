@@ -1,8 +1,21 @@
 import React from 'react';
-import { alpha, Toolbar, Typography, IconButton, Tooltip } from '@mui/material';
+import { alpha, Toolbar, Typography, IconButton, Tooltip, Badge } from '@mui/material';
 import { Download, Filter } from 'lucide-react';
+import { FilterConfig } from '../../types/table';
 
-export function TableToolbar() {
+interface TableToolbarProps {
+  onOpenFilter: () => void;
+  filters: FilterConfig;
+}
+
+export function TableToolbar({ onOpenFilter, filters }: TableToolbarProps) {
+  const activeFiltersCount = Object.keys(filters).reduce((count, key) => {
+    if (key === 'salaryRange') {
+      return count + (filters.salaryRange?.min ? 1 : 0) + (filters.salaryRange?.max ? 1 : 0);
+    }
+    return count + (filters[key as keyof FilterConfig] ? 1 : 0);
+  }, 0);
+
   return (
     <Toolbar
       sx={{
@@ -21,8 +34,19 @@ export function TableToolbar() {
         Employee Data
       </Typography>
       <Tooltip title="Filter list">
-        <IconButton>
-          <Filter />
+        <IconButton onClick={onOpenFilter}>
+          <Badge 
+            badgeContent={activeFiltersCount} 
+            color="primary"
+            sx={{
+              '& .MuiBadge-badge': {
+                right: -3,
+                top: 3,
+              },
+            }}
+          >
+            <Filter />
+          </Badge>
         </IconButton>
       </Tooltip>
       <Tooltip title="Export data">

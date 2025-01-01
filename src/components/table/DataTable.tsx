@@ -14,13 +14,24 @@ import { useTableData } from '../../hooks/useTableData';
 import { TableToolbar } from './TableToolbar';
 import { TableLoadingSkeleton } from './TableLoadingSkeleton';
 import { EditDrawer } from './EditDrawer';
+import { FilterDrawer } from './FilterDrawer';
 import { TableData } from '../../types/table';
 
 export default function DataTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [selectedRecord, setSelectedRecord] = useState<TableData | null>(null);
-  const { data, isLoading, sortConfig, handleSort, updateRecord } = useTableData();
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  
+  const { 
+    data, 
+    isLoading, 
+    sortConfig, 
+    filters,
+    handleSort, 
+    updateRecord,
+    handleFilter 
+  } = useTableData();
 
   const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
@@ -39,7 +50,10 @@ export default function DataTable() {
 
   return (
     <Paper sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <TableToolbar />
+      <TableToolbar 
+        onOpenFilter={() => setIsFilterOpen(true)}
+        filters={filters}
+      />
       <TableContainer sx={{ flex: 1 }}>
         <Table stickyHeader>
           <TableHead>
@@ -110,11 +124,19 @@ export default function DataTable() {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
+      
       <EditDrawer
         open={!!selectedRecord}
         record={selectedRecord}
         onClose={() => setSelectedRecord(null)}
         onSave={updateRecord}
+      />
+      
+      <FilterDrawer
+        open={isFilterOpen}
+        onClose={() => setIsFilterOpen(false)}
+        onApplyFilters={handleFilter}
+        currentFilters={filters}
       />
     </Paper>
   );

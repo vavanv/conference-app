@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { tableData } from '../config/tableData';
-import { TableData, SortConfig } from '../types/table';
+import { TableData, SortConfig, FilterConfig } from '../types/table';
 
 export function useTableData() {
   const [data, setData] = useState<TableData[]>([]);
@@ -9,6 +9,7 @@ export function useTableData() {
     key: 'name',
     direction: 'asc'
   });
+  const [filters, setFilters] = useState<FilterConfig>({});
 
   useEffect(() => {
     // Simulate API call
@@ -46,5 +47,37 @@ export function useTableData() {
     );
   };
 
-  return { data, isLoading, sortConfig, handleSort, updateRecord };
+  const handleFilter = (newFilters: FilterConfig) => {
+    setFilters(newFilters);
+  };
+
+  const filteredData = useMemo(() => {
+    return data.filter(item => {
+      const nameMatch = !filters.name || 
+        item.name.toLowerCase().includes(filters.name.toLowerCase());
+      
+      const positionMatch = !filters.position || 
+        item.position.toLowerCase().includes(filters.position.toLowerCase());
+      
+      const locationMatch = !filters.location || 
+        item.location.toLowerCase().includes(filters.location.toLowerCase());
+      
+      const salaryMatch = !filters.salaryRange || (
+        (!filters.salaryRange.min || item.salary >= filters.salaryRange.min) &&
+        (!filters.salaryRange.max || item.salary <= filters.salaryRange.max)
+      );
+
+      return nameMatch && positionMatch && locationMatch && salaryMatch;
+    });
+  }, [data, filters]);
+
+  return { 
+    data: filteredData, 
+    isLoading, 
+    sortConfig, 
+    filters,
+    handleSort, 
+    updateRecord,
+    handleFilter
+  };
 }
