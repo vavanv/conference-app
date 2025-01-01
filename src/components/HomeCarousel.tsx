@@ -5,7 +5,7 @@ import { carouselItems } from '../config/carouselItems';
 
 export default function HomeCarousel() {
   return (
-    <Box sx={{ height: 'calc(100vh - 84px)' }}>
+    <Box sx={{ height: '100%' }}>
       <Carousel
         animation="slide"
         interval={5000}
@@ -26,7 +26,7 @@ export default function HomeCarousel() {
             sx={{
               position: 'relative',
               height: '100%',
-              backgroundImage: `url(${item.image})`,
+              backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(${item.image})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
