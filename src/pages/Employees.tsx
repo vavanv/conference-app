@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography, Box } from '@mui/material';
-import EmployeesGrid from '../components/employees/EmployeesGrid';
+import { EmployeesGrid } from '../components/employees/EmployeesGrid';
 
 export default function Employees() {
   return (

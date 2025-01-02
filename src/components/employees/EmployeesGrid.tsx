@@ -5,11 +5,13 @@ import { Employee, EmployeeFormData } from '../../types/employee';
 import { EmployeeForm } from './EmployeeForm';
 import { EmployeesToolbar } from './EmployeesToolbar';
 import { ConfirmDialog } from '../common/ConfirmDialog';
-import { useEmployees } from '../../hooks/useEmployees';
+import { useAppSelector, useAppDispatch } from '../../hooks/redux';
+import { addEmployee, updateEmployee, deleteEmployee } from '../../store/slices/employeesSlice';
 import { getEmployeeColumns } from './columns';
 
-export default function EmployeesGrid() {
-  const { employees, addEmployee, updateEmployee, deleteEmployee } = useEmployees();
+export function EmployeesGrid() {
+  const dispatch = useAppDispatch();
+  const employees = useAppSelector(state => state.employees.items);
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [editEmployee, setEditEmployee] = useState<Employee | null>(null);
   const [deleteEmployeeId, setDeleteEmployeeId] = useState<string | null>(null);
@@ -24,7 +26,7 @@ export default function EmployeesGrid() {
 
   const handleEditSubmit = (data: EmployeeFormData) => {
     if (editEmployee) {
-      updateEmployee(editEmployee.id, data);
+      dispatch(updateEmployee({ id: editEmployee.id, data }));
       setEditEmployee(null);
     }
   };
@@ -35,9 +37,14 @@ export default function EmployeesGrid() {
 
   const handleDeleteConfirm = () => {
     if (deleteEmployeeId) {
-      deleteEmployee(deleteEmployeeId);
+      dispatch(deleteEmployee(deleteEmployeeId));
       setDeleteEmployeeId(null);
     }
+  };
+
+  const handleAddEmployee = (data: EmployeeFormData) => {
+    dispatch(addEmployee(data));
+    setIsAddOpen(false);
   };
 
   const columns = getEmployeeColumns(handleEdit, handleDeleteClick);
@@ -80,7 +87,7 @@ export default function EmployeesGrid() {
       <EmployeeForm
         open={isAddOpen}
         onClose={() => setIsAddOpen(false)}
-        onSubmit={addEmployee}
+        onSubmit={handleAddEmployee}
         title="Add New Employee"
       />
 

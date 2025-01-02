@@ -13,12 +13,16 @@ import { Eye, EyeOff } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema } from '../../schemas/login';
-import { useLogin } from '../../hooks/useLogin';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { loginStart, loginSuccess, loginFailure } from '../../store/slices/authSlice';
 import type { LoginFormData } from '../../types/auth';
 
-export default function LoginForm() {
+export function LoginForm() {
   const [showPassword, setShowPassword] = React.useState(false);
-  const { login, error, isLoading } = useLogin();
+  const dispatch = useAppDispatch();
+  const { error, loading } = useAppSelector(state => state.auth);
+  const navigate = useNavigate();
 
   const { 
     register, 
@@ -28,6 +32,18 @@ export default function LoginForm() {
     resolver: yupResolver(loginSchema),
     mode: 'onBlur'
   });
+
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      dispatch(loginStart());
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      dispatch(loginSuccess(data));
+      navigate('/');
+    } catch (err) {
+      dispatch(loginFailure('An error occurred during login'));
+    }
+  };
 
   return (
     <>
@@ -47,7 +63,7 @@ export default function LoginForm() {
 
       <Box 
         component="form" 
-        onSubmit={handleSubmit(login)}
+        onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
         <TextField
@@ -88,10 +104,10 @@ export default function LoginForm() {
           fullWidth
           variant="contained"
           type="submit"
-          disabled={isLoading}
+          disabled={loading}
           sx={{ py: 1 }}
         >
-          {isLoading ? 'Signing in...' : 'Sign In'}
+          {loading ? 'Signing in...' : 'Sign In'}
         </Button>
       </Box>
     </>

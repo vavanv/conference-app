@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Paper } from '@mui/material';
-import LoginForm from '../components/auth/LoginForm';
+import { LoginForm } from '../components/auth/LoginForm';
 
 export default function Login() {
   return (
