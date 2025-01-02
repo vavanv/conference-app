@@ -7,7 +7,7 @@ import { ConfirmDialog } from '../common/ConfirmDialog';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import { addEmployee, updateEmployee, deleteEmployee } from '../../store/slices/employeesSlice';
 import { getEmployeeColumns } from './columns';
-import { CustomGridToolbar } from './CustomGridToolbar';
+import { CustomGridToolbar } from '../common/CustomGridToolbar';
 
 export function EmployeesGrid() {
   const dispatch = useAppDispatch();
@@ -63,7 +63,7 @@ export function EmployeesGrid() {
           density="compact"
           components={{
             Toolbar: (props) => (
-              <CustomGridToolbar {...props} onAdd={() => setIsAddOpen(true)} />
+              <CustomGridToolbar {...props} onAdd={() => setIsAddOpen(true)} addButtonText="Add Employee" />
             ),
           }}
           paginationModel={paginationModel}

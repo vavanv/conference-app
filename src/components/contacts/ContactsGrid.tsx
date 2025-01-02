@@ -7,7 +7,7 @@ import { ConfirmDialog } from '../common/ConfirmDialog';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import { addContact, updateContact, deleteContact } from '../../store/slices/contactsSlice';
 import { getContactColumns } from './columns';
-import { CustomGridToolbar } from './CustomGridToolbar';
+import { CustomGridToolbar } from '../common/CustomGridToolbar';
 
 export function ContactsGrid() {
   const dispatch = useAppDispatch();
@@ -63,7 +63,7 @@ export function ContactsGrid() {
           density="compact"
           components={{
             Toolbar: (props) => (
-              <CustomGridToolbar {...props} onAdd={() => setIsAddOpen(true)} />
+              <CustomGridToolbar {...props} onAdd={() => setIsAddOpen(true)} addButtonText="Add Contact" />
             ),
           }}
           paginationModel={paginationModel}
