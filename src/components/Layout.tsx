@@ -6,14 +6,15 @@ import {
   Toolbar, 
   Typography, 
   IconButton,
-  useTheme
+  useTheme,
+  alpha
 } from '@mui/material';
 import { Menu as MenuIcon } from 'lucide-react';
 import DrawerContent from './DrawerContent';
 import BottomControl from './common/BottomControl';
 
 const drawerWidth = 240;
-const minDrawerWidth = 56; // Reduced from 73 to 56
+const minDrawerWidth = 56;
 const bottomControlHeight = 32;
 const appBarHeight = 48;
 
@@ -34,6 +35,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <Box sx={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
       <AppBar 
         position="fixed" 
+        elevation={0}
         sx={{ 
           width: { sm: `calc(100% - ${isDrawerOpen ? drawerWidth : minDrawerWidth}px)` },
           ml: { sm: isDrawerOpen ? `${drawerWidth}px` : `${minDrawerWidth}px` },
@@ -41,19 +43,31 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
           }),
+          bgcolor: 'background.paper',
+          borderBottom: '1px solid',
+          borderColor: 'divider',
         }}
       >
-        <Toolbar>
+        <Toolbar sx={{ minHeight: appBarHeight }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+            sx={{ 
+              mr: 2, 
+              display: { sm: 'none' },
+              color: 'text.secondary'
+            }}
           >
             <MenuIcon size={18} />
           </IconButton>
-          <Typography variant="subtitle1" noWrap component="div">
+          <Typography 
+            variant="subtitle1" 
+            noWrap 
+            component="div"
+            sx={{ color: 'text.secondary' }}
+          >
             My App
           </Typography>
         </Toolbar>

@@ -13,7 +13,7 @@ export default function BottomControl({ drawerWidth, minDrawerWidth }: BottomCon
 
   return (
     <Paper
-      elevation={3}
+      elevation={0}
       sx={{
         position: 'fixed',
         bottom: 0,
