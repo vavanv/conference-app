@@ -86,6 +86,7 @@ export function FilterDrawer({
 
         <Stack spacing={3}>
           <TextField
+            size="small"
             label="Name"
             value={filters.name || ''}
             onChange={handleChange('name')}
@@ -93,6 +94,7 @@ export function FilterDrawer({
           />
           
           <TextField
+            size="small"
             label="Position"
             value={filters.position || ''}
             onChange={handleChange('position')}
@@ -100,6 +102,7 @@ export function FilterDrawer({
           />
           
           <TextField
+            size="small"
             label="Location"
             value={filters.location || ''}
             onChange={handleChange('location')}
@@ -112,6 +115,7 @@ export function FilterDrawer({
           
           <Stack direction="row" spacing={2}>
             <TextField
+              size="small"
               label="Min"
               type="number"
               name="salary-min"
@@ -123,6 +127,7 @@ export function FilterDrawer({
               }}
             />
             <TextField
+              size="small"
               label="Max"
               type="number"
               name="salary-max"

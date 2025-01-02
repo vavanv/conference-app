@@ -86,6 +86,7 @@ export function EmployeeForm({
             <form onSubmit={handleSubmit(handleFormSubmit)}>
               <Stack spacing={3}>
                 <TextField
+                  size="small"
                   label="First Name"
                   error={!!errors.firstName}
                   helperText={errors.firstName?.message}
@@ -93,6 +94,7 @@ export function EmployeeForm({
                   fullWidth
                 />
                 <TextField
+                  size="small"
                   label="Last Name"
                   error={!!errors.lastName}
                   helperText={errors.lastName?.message}
@@ -100,6 +102,7 @@ export function EmployeeForm({
                   fullWidth
                 />
                 <TextField
+                  size="small"
                   label="Email"
                   error={!!errors.email}
                   helperText={errors.email?.message}
@@ -107,6 +110,7 @@ export function EmployeeForm({
                   fullWidth
                 />
                 <TextField
+                  size="small"
                   label="Department"
                   error={!!errors.department}
                   helperText={errors.department?.message}
@@ -114,6 +118,7 @@ export function EmployeeForm({
                   fullWidth
                 />
                 <TextField
+                  size="small"
                   label="Position"
                   error={!!errors.position}
                   helperText={errors.position?.message}
@@ -121,6 +126,7 @@ export function EmployeeForm({
                   fullWidth
                 />
                 <TextField
+                  size="small"
                   label="Location"
                   error={!!errors.location}
                   helperText={errors.location?.message}
@@ -128,6 +134,7 @@ export function EmployeeForm({
                   fullWidth
                 />
                 <TextField
+                  size="small"
                   select
                   label="Status"
                   error={!!errors.status}

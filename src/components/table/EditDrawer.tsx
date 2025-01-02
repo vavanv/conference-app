@@ -90,24 +90,28 @@ export function EditDrawer({ open, record, onClose, onSave }: EditDrawerProps) {
             <form onSubmit={handleSubmit}>
               <Stack spacing={3}>
                 <TextField
+                  size="small"
                   label="Name"
                   value={formData.name}
                   onChange={handleChange('name')}
                   fullWidth
                 />
                 <TextField
+                  size="small"
                   label="Position"
                   value={formData.position}
                   onChange={handleChange('position')}
                   fullWidth
                 />
                 <TextField
+                  size="small"
                   label="Location"
                   value={formData.location}
                   onChange={handleChange('location')}
                   fullWidth
                 />
                 <TextField
+                  size="small"
                   label="Salary"
                   type="number"
                   value={formData.salary}

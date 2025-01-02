@@ -52,6 +52,7 @@ export default function LoginForm() {
       >
         <TextField
           fullWidth
+          size="small"
           label="Email"
           error={!!errors.email}
           helperText={errors.email?.message}
@@ -61,6 +62,7 @@ export default function LoginForm() {
         
         <TextField
           fullWidth
+          size="small"
           label="Password"
           type={showPassword ? 'text' : 'password'}
           error={!!errors.password}
