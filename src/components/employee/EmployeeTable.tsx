@@ -1,59 +1,56 @@
 import React, { useState } from 'react';
 import { Box } from '@mui/material';
-import { DataGrid, GridColDef, GridActionsCellItem, GridRowParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridActionsCellItem } from '@mui/x-data-grid';
 import { Edit2, Trash2 } from 'lucide-react';
 import { useEmployeeData } from '../../hooks/useEmployeeData';
 import { EmployeeToolbar } from './EmployeeToolbar';
 import { EditEmployeeDrawer } from './EditEmployeeDrawer';
 import { FilterEmployeeDrawer } from './FilterEmployeeDrawer';
 import { AddEmployeeDrawer } from './AddEmployeeDrawer';
-import { TableData } from '../../types/table';
+import { ConfirmDialog } from '../common/ConfirmDialog';
 import { formatCurrency } from '../../utils/formatters';
+import { Employee } from '../../types/employee';
 
 export default function EmployeeTable() {
-  const [selectedEmployee, setSelectedEmployee] = useState<TableData | null>(null);
+  const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [isAddEmployeeOpen, setIsAddEmployeeOpen] = useState(false);
+  const [isAddOpen, setIsAddOpen] = useState(false);
+  const [deleteEmployeeId, setDeleteEmployeeId] = useState<number | null>(null);
   
   const { 
-    data, 
+    employees, 
     isLoading,
     filters,
     addEmployee,
-    updateRecord,
-    handleFilter,
-    deleteEmployee
+    updateEmployee,
+    deleteEmployee,
+    handleFilter
   } = useEmployeeData();
 
-  const handleEdit = (params: GridRowParams) => {
-    setSelectedEmployee(params.row);
+  const handleEdit = (employee: Employee) => {
+    setSelectedEmployee(employee);
+  };
+
+  const handleDeleteClick = (employeeId: number) => {
+    setDeleteEmployeeId(employeeId);
+  };
+
+  const handleDeleteConfirm = () => {
+    if (deleteEmployeeId) {
+      deleteEmployee(deleteEmployeeId);
+      setDeleteEmployeeId(null);
+    }
   };
 
   const columns: GridColDef[] = [
-    { 
-      field: 'name', 
-      headerName: 'Name', 
-      flex: 1,
-      minWidth: 180 
-    },
-    { 
-      field: 'position', 
-      headerName: 'Position', 
-      flex: 1,
-      minWidth: 200 
-    },
-    { 
-      field: 'location', 
-      headerName: 'Location', 
-      flex: 1,
-      minWidth: 150 
-    },
+    { field: 'name', headerName: 'Name', flex: 1 },
+    { field: 'position', headerName: 'Position', flex: 1 },
+    { field: 'location', headerName: 'Location', flex: 1 },
     { 
       field: 'salary', 
       headerName: 'Salary',
       type: 'number',
-      flex: 1,
-      minWidth: 130,
+      flex: 0.7,
       valueFormatter: (params) => formatCurrency(params.value)
     },
     {
@@ -65,27 +62,29 @@ export default function EmployeeTable() {
         <GridActionsCellItem
           icon={<Edit2 size={20} />}
           label="Edit"
-          onClick={() => handleEdit(params)}
+          onClick={() => handleEdit(params.row)}
         />,
         <GridActionsCellItem
           icon={<Trash2 size={20} />}
           label="Delete"
-          onClick={() => deleteEmployee(params.id)}
+          onClick={() => handleDeleteClick(params.row.id)}
         />
       ]
     }
   ];
 
+  const employeeToDelete = employees.find(e => e.id === deleteEmployeeId);
+
   return (
-    <Box sx={{ height: '100%', width: '100%' }}>
+    <Box sx={{ height: 'calc(100vh - 180px)', width: '100%' }}>
       <EmployeeToolbar 
+        onAdd={() => setIsAddOpen(true)}
         onOpenFilter={() => setIsFilterOpen(true)}
-        onOpenAddEmployee={() => setIsAddEmployeeOpen(true)}
         filters={filters}
       />
       
       <DataGrid
-        rows={data}
+        rows={employees}
         columns={columns}
         loading={isLoading}
         initialState={{
@@ -96,7 +95,6 @@ export default function EmployeeTable() {
         }}
         pageSizeOptions={[10, 25, 50]}
         disableRowSelectionOnClick
-        autoHeight
         sx={{
           '& .MuiDataGrid-cell': {
             borderColor: 'divider',
@@ -110,9 +108,10 @@ export default function EmployeeTable() {
       
       <EditEmployeeDrawer
         open={!!selectedEmployee}
-        record={selectedEmployee}
         onClose={() => setSelectedEmployee(null)}
-        onSave={updateRecord}
+        onSubmit={updateEmployee}
+        initialData={selectedEmployee}
+        title="Edit Employee"
       />
       
       <FilterEmployeeDrawer
@@ -123,9 +122,19 @@ export default function EmployeeTable() {
       />
 
       <AddEmployeeDrawer
-        open={isAddEmployeeOpen}
-        onClose={() => setIsAddEmployeeOpen(false)}
-        onAdd={addEmployee}
+        open={isAddOpen}
+        onClose={() => setIsAddOpen(false)}
+        onSubmit={addEmployee}
+        title="Add New Employee"
+      />
+
+      <ConfirmDialog
+        open={!!deleteEmployeeId}
+        title="Delete Employee"
+        message={employeeToDelete ? `Are you sure you want to delete ${employeeToDelete.name}?` : ''}
+        confirmLabel="Delete"
+        onConfirm={handleDeleteConfirm}
+        onCancel={() => setDeleteEmployeeId(null)}
       />
     </Box>
   );
