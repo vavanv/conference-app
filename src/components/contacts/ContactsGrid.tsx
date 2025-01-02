@@ -3,11 +3,11 @@ import { Box } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { Contact, ContactFormData } from '../../types/contact';
 import { ContactForm } from './ContactForm';
-import { ContactsToolbar } from './ContactsToolbar';
 import { ConfirmDialog } from '../common/ConfirmDialog';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import { addContact, updateContact, deleteContact } from '../../store/slices/contactsSlice';
 import { getContactColumns } from './columns';
+import { CustomGridToolbar } from './CustomGridToolbar';
 
 export function ContactsGrid() {
   const dispatch = useAppDispatch();
@@ -55,14 +55,17 @@ export function ContactsGrid() {
       display: 'flex', 
       flexDirection: 'column',
       height: 'calc(100vh - 140px)'
-    }}>
-      <ContactsToolbar onAdd={() => setIsAddOpen(true)} />
-      
+    }}>      
       <Box sx={{ flex: 1, width: '100%', overflow: 'hidden' }}>
         <DataGrid
           rows={contacts}
           columns={columns}
           density="compact"
+          components={{
+            Toolbar: (props) => (
+              <CustomGridToolbar {...props} onAdd={() => setIsAddOpen(true)} />
+            ),
+          }}
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
           pageSizeOptions={[10, 25, 50]}

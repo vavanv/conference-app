@@ -3,11 +3,11 @@ import { Box } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { Employee, EmployeeFormData } from '../../types/employee';
 import { EmployeeForm } from './EmployeeForm';
-import { EmployeesToolbar } from './EmployeesToolbar';
 import { ConfirmDialog } from '../common/ConfirmDialog';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import { addEmployee, updateEmployee, deleteEmployee } from '../../store/slices/employeesSlice';
 import { getEmployeeColumns } from './columns';
+import { CustomGridToolbar } from './CustomGridToolbar';
 
 export function EmployeesGrid() {
   const dispatch = useAppDispatch();
@@ -55,14 +55,17 @@ export function EmployeesGrid() {
       display: 'flex', 
       flexDirection: 'column',
       height: 'calc(100vh - 140px)'
-    }}>
-      <EmployeesToolbar onAdd={() => setIsAddOpen(true)} />
-      
+    }}>      
       <Box sx={{ flex: 1, width: '100%', overflow: 'hidden' }}>
         <DataGrid
           rows={employees}
           columns={columns}
           density="compact"
+          components={{
+            Toolbar: (props) => (
+              <CustomGridToolbar {...props} onAdd={() => setIsAddOpen(true)} />
+            ),
+          }}
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
           pageSizeOptions={[10, 25, 50]}
