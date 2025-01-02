@@ -10,9 +10,11 @@ import {
 } from '@mui/material';
 import { Menu as MenuIcon } from 'lucide-react';
 import DrawerContent from './DrawerContent';
+import BottomControl from './common/BottomControl';
 
 const drawerWidth = 240;
 const minDrawerWidth = 73;
+const bottomControlHeight = 48;
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -123,12 +125,15 @@ export default function Layout({ children }: LayoutProps) {
             duration: theme.transitions.duration.enteringScreen,
           }),
           mt: 8,
-          height: 'calc(100vh - 64px)',
+          mb: `${bottomControlHeight}px`,
+          height: `calc(100vh - 64px - ${bottomControlHeight}px)`,
           overflow: 'hidden'
         }}
       >
         {children}
       </Box>
+      
+      <BottomControl />
     </Box>
   );
 }

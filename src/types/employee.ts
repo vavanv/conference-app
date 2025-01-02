@@ -1,9 +1,12 @@
 export interface Employee {
-  id: number;
-  name: string;
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  department: string;
   position: string;
   location: string;
-  salary: number;
+  status: 'active' | 'inactive';
 }
 
 export interface EmployeeFormData extends Omit<Employee, 'id'> {}

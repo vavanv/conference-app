@@ -2,37 +2,37 @@ import React, { useState } from 'react';
 import { Box } from '@mui/material';
 import { DataGrid, GridColDef, GridActionsCellItem } from '@mui/x-data-grid';
 import { Edit2, Trash2 } from 'lucide-react';
-import { Contact, ContactFormData } from '../../types/contact';
-import { ContactForm } from './ContactForm';
-import { ContactsToolbar } from './ContactsToolbar';
+import { Employee, EmployeeFormData } from '../../types/employee';
+import { EmployeeForm } from './EmployeeForm';
+import { EmployeesToolbar } from './EmployeesToolbar';
 import { ConfirmDialog } from '../common/ConfirmDialog';
-import { useContacts } from '../../hooks/useContacts';
+import { useEmployees } from '../../hooks/useEmployees';
 
-export default function ContactsGrid() {
-  const { contacts, addContact, updateContact, deleteContact } = useContacts();
+export default function EmployeesGrid() {
+  const { employees, addEmployee, updateEmployee, deleteEmployee } = useEmployees();
   const [isAddOpen, setIsAddOpen] = useState(false);
-  const [editContact, setEditContact] = useState<Contact | null>(null);
-  const [deleteContactId, setDeleteContactId] = useState<string | null>(null);
+  const [editEmployee, setEditEmployee] = useState<Employee | null>(null);
+  const [deleteEmployeeId, setDeleteEmployeeId] = useState<string | null>(null);
 
-  const handleEdit = (contact: Contact) => {
-    setEditContact(contact);
+  const handleEdit = (employee: Employee) => {
+    setEditEmployee(employee);
   };
 
-  const handleEditSubmit = (data: ContactFormData) => {
-    if (editContact) {
-      updateContact(editContact.id, data);
-      setEditContact(null);
+  const handleEditSubmit = (data: EmployeeFormData) => {
+    if (editEmployee) {
+      updateEmployee(editEmployee.id, data);
+      setEditEmployee(null);
     }
   };
 
-  const handleDeleteClick = (contactId: string) => {
-    setDeleteContactId(contactId);
+  const handleDeleteClick = (employeeId: string) => {
+    setDeleteEmployeeId(employeeId);
   };
 
   const handleDeleteConfirm = () => {
-    if (deleteContactId) {
-      deleteContact(deleteContactId);
-      setDeleteContactId(null);
+    if (deleteEmployeeId) {
+      deleteEmployee(deleteEmployeeId);
+      setDeleteEmployeeId(null);
     }
   };
 
@@ -56,22 +56,22 @@ export default function ContactsGrid() {
       minWidth: 200
     },
     { 
-      field: 'phone', 
-      headerName: 'Phone', 
+      field: 'department', 
+      headerName: 'Department', 
+      flex: 1,
+      minWidth: 130
+    },
+    { 
+      field: 'position', 
+      headerName: 'Position', 
       flex: 1,
       minWidth: 150
     },
     { 
-      field: 'company', 
-      headerName: 'Company', 
+      field: 'location', 
+      headerName: 'Location', 
       flex: 1,
-      minWidth: 150
-    },
-    { 
-      field: 'role', 
-      headerName: 'Role', 
-      flex: 1,
-      minWidth: 150
+      minWidth: 120
     },
     { 
       field: 'status', 
@@ -113,7 +113,7 @@ export default function ContactsGrid() {
     }
   ];
 
-  const contactToDelete = contacts.find(c => c.id === deleteContactId);
+  const employeeToDelete = employees.find(e => e.id === deleteEmployeeId);
 
   return (
     <Box sx={{ 
@@ -121,11 +121,11 @@ export default function ContactsGrid() {
       flexDirection: 'column',
       height: 'calc(100vh - 180px - 48px)' // Subtract bottom control height
     }}>
-      <ContactsToolbar onAdd={() => setIsAddOpen(true)} />
+      <EmployeesToolbar onAdd={() => setIsAddOpen(true)} />
       
       <Box sx={{ flex: 1, minHeight: 0 }}>
         <DataGrid
-          rows={contacts}
+          rows={employees}
           columns={columns}
           density="compact"
           initialState={{
@@ -152,30 +152,30 @@ export default function ContactsGrid() {
         />
       </Box>
 
-      <ContactForm
+      <EmployeeForm
         open={isAddOpen}
         onClose={() => setIsAddOpen(false)}
-        onSubmit={addContact}
-        title="Add New Contact"
+        onSubmit={addEmployee}
+        title="Add New Employee"
       />
 
-      {editContact && (
-        <ContactForm
+      {editEmployee && (
+        <EmployeeForm
           open={true}
-          onClose={() => setEditContact(null)}
+          onClose={() => setEditEmployee(null)}
           onSubmit={handleEditSubmit}
-          initialData={editContact}
-          title="Edit Contact"
+          initialData={editEmployee}
+          title="Edit Employee"
         />
       )}
 
       <ConfirmDialog
-        open={!!deleteContactId}
-        title="Delete Contact"
-        message={contactToDelete ? `Are you sure you want to delete ${contactToDelete.firstName} ${contactToDelete.lastName}?` : ''}
+        open={!!deleteEmployeeId}
+        title="Delete Employee"
+        message={employeeToDelete ? `Are you sure you want to delete ${employeeToDelete.firstName} ${employeeToDelete.lastName}?` : ''}
         confirmLabel="Delete"
         onConfirm={handleDeleteConfirm}
-        onCancel={() => setDeleteContactId(null)}
+        onCancel={() => setDeleteEmployeeId(null)}
       />
     </Box>
   );
