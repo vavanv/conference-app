@@ -91,6 +91,7 @@ export default function ContactsGrid() {
       <DataGrid
         rows={contacts}
         columns={columns}
+        density="compact"
         initialState={{
           pagination: { paginationModel: { pageSize: 10 } },
           sorting: {

@@ -6,7 +6,7 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Grid from './pages/Grid';
-import Table from './pages/Table';
+import Employee from './pages/Employee';
 import Contacts from './pages/Contacts';
 
 const theme = createTheme({
@@ -32,7 +32,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/grid" element={<Grid />} />
-            <Route path="/table" element={<Table />} />
+            <Route path="/employee" element={<Employee />} />
             <Route path="/contacts" element={<Contacts />} />
           </Routes>
         </Layout>
