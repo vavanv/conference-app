@@ -89,10 +89,7 @@ export default function LoginForm() {
           variant="contained"
           type="submit"
           disabled={isLoading}
-          sx={{ 
-            fontSize: '11px',
-            py: 1
-          }}
+          sx={{ py: 1 }}
         >
           {isLoading ? 'Signing in...' : 'Sign In'}
         </Button>

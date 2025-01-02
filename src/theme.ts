@@ -29,7 +29,7 @@ export const theme = createTheme({
     },
     button: {
       fontSize: '0.6875rem', // 11px
-      textTransform: 'none',
+      textTransform: 'uppercase',
     },
     caption: {
       fontSize: '0.667rem',
@@ -51,6 +51,7 @@ export const theme = createTheme({
         root: {
           fontSize: '0.6875rem', // 11px
           padding: '6px 16px',
+          textTransform: 'uppercase',
         },
         sizeSmall: {
           fontSize: '0.6875rem', // 11px
