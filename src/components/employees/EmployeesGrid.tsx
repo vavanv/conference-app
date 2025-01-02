@@ -16,7 +16,7 @@ export function EmployeesGrid() {
   const [editEmployee, setEditEmployee] = useState<Employee | null>(null);
   const [deleteEmployeeId, setDeleteEmployeeId] = useState<string | null>(null);
   const [paginationModel, setPaginationModel] = useState({
-    pageSize: 10,
+    pageSize: 25,
     page: 0,
   });
 

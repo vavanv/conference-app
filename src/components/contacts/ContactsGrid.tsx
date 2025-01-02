@@ -5,16 +5,18 @@ import { Contact, ContactFormData } from '../../types/contact';
 import { ContactForm } from './ContactForm';
 import { ContactsToolbar } from './ContactsToolbar';
 import { ConfirmDialog } from '../common/ConfirmDialog';
-import { useContacts } from '../../hooks/useContacts';
+import { useAppSelector, useAppDispatch } from '../../hooks/redux';
+import { addContact, updateContact, deleteContact } from '../../store/slices/contactsSlice';
 import { getContactColumns } from './columns';
 
-export default function ContactsGrid() {
-  const { contacts, addContact, updateContact, deleteContact } = useContacts();
+export function ContactsGrid() {
+  const dispatch = useAppDispatch();
+  const contacts = useAppSelector(state => state.contacts.items);
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [editContact, setEditContact] = useState<Contact | null>(null);
   const [deleteContactId, setDeleteContactId] = useState<string | null>(null);
   const [paginationModel, setPaginationModel] = useState({
-    pageSize: 10,
+    pageSize: 25,
     page: 0,
   });
 
@@ -24,7 +26,7 @@ export default function ContactsGrid() {
 
   const handleEditSubmit = (data: ContactFormData) => {
     if (editContact) {
-      updateContact(editContact.id, data);
+      dispatch(updateContact({ id: editContact.id, data }));
       setEditContact(null);
     }
   };
@@ -35,9 +37,14 @@ export default function ContactsGrid() {
 
   const handleDeleteConfirm = () => {
     if (deleteContactId) {
-      deleteContact(deleteContactId);
+      dispatch(deleteContact(deleteContactId));
       setDeleteContactId(null);
     }
+  };
+
+  const handleAddContact = (data: ContactFormData) => {
+    dispatch(addContact(data));
+    setIsAddOpen(false);
   };
 
   const columns = getContactColumns(handleEdit, handleDeleteClick);
@@ -80,7 +87,7 @@ export default function ContactsGrid() {
       <ContactForm
         open={isAddOpen}
         onClose={() => setIsAddOpen(false)}
-        onSubmit={addContact}
+        onSubmit={handleAddContact}
         title="Add New Contact"
       />
 
