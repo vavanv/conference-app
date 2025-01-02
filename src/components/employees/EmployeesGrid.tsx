@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import { Box } from '@mui/material';
-import { DataGrid, GridColDef, GridActionsCellItem } from '@mui/x-data-grid';
-import { Edit2, Trash2 } from 'lucide-react';
+import { DataGrid } from '@mui/x-data-grid';
 import { Employee, EmployeeFormData } from '../../types/employee';
 import { EmployeeForm } from './EmployeeForm';
 import { EmployeesToolbar } from './EmployeesToolbar';
 import { ConfirmDialog } from '../common/ConfirmDialog';
 import { useEmployees } from '../../hooks/useEmployees';
+import { getEmployeeColumns } from './columns';
 
 export default function EmployeesGrid() {
   const { employees, addEmployee, updateEmployee, deleteEmployee } = useEmployees();
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [editEmployee, setEditEmployee] = useState<Employee | null>(null);
   const [deleteEmployeeId, setDeleteEmployeeId] = useState<string | null>(null);
+  const [paginationModel, setPaginationModel] = useState({
+    pageSize: 10,
+    page: 0,
+  });
 
   const handleEdit = (employee: Employee) => {
     setEditEmployee(employee);
@@ -36,108 +40,29 @@ export default function EmployeesGrid() {
     }
   };
 
-  const columns: GridColDef[] = [
-    { 
-      field: 'firstName', 
-      headerName: 'First Name', 
-      flex: 1,
-      minWidth: 130
-    },
-    { 
-      field: 'lastName', 
-      headerName: 'Last Name', 
-      flex: 1,
-      minWidth: 130
-    },
-    { 
-      field: 'email', 
-      headerName: 'Email', 
-      flex: 1.5,
-      minWidth: 200
-    },
-    { 
-      field: 'department', 
-      headerName: 'Department', 
-      flex: 1,
-      minWidth: 130
-    },
-    { 
-      field: 'position', 
-      headerName: 'Position', 
-      flex: 1,
-      minWidth: 150
-    },
-    { 
-      field: 'location', 
-      headerName: 'Location', 
-      flex: 1,
-      minWidth: 120
-    },
-    { 
-      field: 'status', 
-      headerName: 'Status', 
-      flex: 0.7,
-      minWidth: 100,
-      renderCell: (params) => (
-        <Box
-          sx={{
-            px: 2,
-            py: 0.5,
-            borderRadius: 1,
-            bgcolor: params.value === 'active' ? 'success.light' : 'error.light',
-            color: params.value === 'active' ? 'success.dark' : 'error.dark',
-            textTransform: 'capitalize'
-          }}
-        >
-          {params.value}
-        </Box>
-      )
-    },
-    {
-      field: 'actions',
-      type: 'actions',
-      headerName: 'Actions',
-      width: 100,
-      getActions: (params) => [
-        <GridActionsCellItem
-          icon={<Edit2 size={20} />}
-          label="Edit"
-          onClick={() => handleEdit(params.row)}
-        />,
-        <GridActionsCellItem
-          icon={<Trash2 size={20} />}
-          label="Delete"
-          onClick={() => handleDeleteClick(params.row.id)}
-        />
-      ]
-    }
-  ];
-
+  const columns = getEmployeeColumns(handleEdit, handleDeleteClick);
   const employeeToDelete = employees.find(e => e.id === deleteEmployeeId);
 
   return (
     <Box sx={{ 
       display: 'flex', 
       flexDirection: 'column',
-      height: 'calc(100vh - 180px - 48px)' // Subtract bottom control height
+      height: 'calc(100vh - 140px)'
     }}>
       <EmployeesToolbar onAdd={() => setIsAddOpen(true)} />
       
-      <Box sx={{ flex: 1, minHeight: 0 }}>
+      <Box sx={{ flex: 1, width: '100%', overflow: 'hidden' }}>
         <DataGrid
           rows={employees}
           columns={columns}
           density="compact"
-          initialState={{
-            pagination: { paginationModel: { pageSize: 10 } },
-            sorting: {
-              sortModel: [{ field: 'lastName', sort: 'asc' }],
-            },
-          }}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
           pageSizeOptions={[10, 25, 50]}
           disableRowSelectionOnClick
           sx={{
             height: '100%',
+            border: 'none',
             '& .MuiDataGrid-cell': {
               borderColor: 'divider',
             },
