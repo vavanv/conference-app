@@ -4,7 +4,6 @@ import { ThemeProvider, CssBaseline } from '@mui/material';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import Grid from './pages/Grid';
 import Employees from './pages/Employees';
 import Contacts from './pages/Contacts';
 import { theme } from './theme';
@@ -18,7 +17,6 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/grid" element={<Grid />} />
             <Route path="/employees" element={<Employees />} />
             <Route path="/contacts" element={<Contacts />} />
           </Routes>

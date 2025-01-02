@@ -9,7 +9,7 @@ import {
   IconButton,
   useTheme
 } from '@mui/material';
-import { Home, LogIn, ChevronLeft, ChevronRight, Grid as GridIcon, Users, UserCircle } from 'lucide-react';
+import { Home, LogIn, ChevronLeft, ChevronRight, Users, UserCircle } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Copyright from './Copyright';
 
@@ -25,7 +25,6 @@ export default function DrawerContent({ isDrawerOpen, toggleDrawer }: DrawerCont
 
   const menuItems = [
     { text: 'Home', icon: <Home size={18} />, path: '/' },
-    { text: 'Grid', icon: <GridIcon size={18} />, path: '/grid' },
     { text: 'Employees', icon: <UserCircle size={18} />, path: '/employees' },
     { text: 'Contacts', icon: <Users size={18} />, path: '/contacts' },
     { text: 'Login', icon: <LogIn size={18} />, path: '/login' }
@@ -41,7 +40,7 @@ export default function DrawerContent({ isDrawerOpen, toggleDrawer }: DrawerCont
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'flex-end',
-        minHeight: 48, // Reduced from default 64px
+        minHeight: 48,
         px: [1]
       }}>
         <IconButton onClick={toggleDrawer} size="small">
@@ -52,7 +51,7 @@ export default function DrawerContent({ isDrawerOpen, toggleDrawer }: DrawerCont
         sx={{ 
           flex: '1 1 auto', 
           overflowY: 'auto',
-          py: 0.5 // Reduced padding
+          py: 0.5
         }}
       >
         {menuItems.map((item) => (
@@ -61,10 +60,10 @@ export default function DrawerContent({ isDrawerOpen, toggleDrawer }: DrawerCont
               onClick={() => navigate(item.path)}
               selected={location.pathname === item.path}
               sx={{
-                minHeight: 36, // Reduced from 48px
+                minHeight: 36,
                 justifyContent: isDrawerOpen ? 'initial' : 'center',
                 px: 2,
-                py: 0.5, // Added vertical padding
+                py: 0.5,
                 '&.Mui-selected': {
                   backgroundColor: theme.palette.primary.light,
                   '&:hover': {
