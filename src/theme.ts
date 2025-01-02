@@ -62,5 +62,23 @@ export const theme = createTheme({
         },
       },
     },
+    MuiTextField: {
+      defaultProps: {
+        variant: 'standard',
+      },
+      styleOverrides: {
+        root: {
+          '& .MuiInputBase-root': {
+            fontSize: '0.875rem',
+          },
+          '& .MuiInputLabel-root': {
+            fontSize: '0.875rem',
+          },
+          '& .MuiFormHelperText-root': {
+            fontSize: '0.75rem',
+          },
+        },
+      },
+    },
   },
 });
