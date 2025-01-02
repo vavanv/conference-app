@@ -67,17 +67,19 @@ export const getEmployeeColumns = (
     field: 'actions',
     type: 'actions',
     headerName: 'Actions',
-    width: 100,
+    width: 80,
     getActions: (params) => [
       <GridActionsCellItem
-        icon={<Edit2 size={18} />}
+        icon={<Edit2 size={14} />}
         label="Edit"
         onClick={() => onEdit(params.row)}
+        sx={{ '& .MuiSvgIcon-root': { fontSize: '1.1rem' } }}
       />,
       <GridActionsCellItem
-        icon={<Trash2 size={18} />}
+        icon={<Trash2 size={14} />}
         label="Delete"
         onClick={() => onDelete(params.row.id)}
+        sx={{ '& .MuiSvgIcon-root': { fontSize: '1.1rem' } }}
       />
     ]
   }

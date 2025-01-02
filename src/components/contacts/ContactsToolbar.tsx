@@ -11,8 +11,9 @@ export function ContactsToolbar({ onAdd }: ContactsToolbarProps) {
     <Box sx={{ mb: 2, display: 'flex', justifyContent: 'flex-end' }}>
       <Button
         variant="contained"
-        startIcon={<UserPlus />}
+        startIcon={<UserPlus size={14} />}
         onClick={onAdd}
+        size="small"
       >
         Add Contact
       </Button>
