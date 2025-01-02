@@ -13,14 +13,11 @@ import DrawerContent from './DrawerContent';
 import BottomControl from './common/BottomControl';
 
 const drawerWidth = 240;
-const minDrawerWidth = 73;
-const bottomControlHeight = 48;
+const minDrawerWidth = 56; // Reduced from 73 to 56
+const bottomControlHeight = 32;
+const appBarHeight = 48;
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
-
-export default function Layout({ children }: LayoutProps) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(true);
   const theme = useTheme();
@@ -54,9 +51,9 @@ export default function Layout({ children }: LayoutProps) {
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: 'none' } }}
           >
-            <MenuIcon />
+            <MenuIcon size={18} />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography variant="subtitle1" noWrap component="div">
             My App
           </Typography>
         </Toolbar>
@@ -124,16 +121,16 @@ export default function Layout({ children }: LayoutProps) {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
           }),
-          mt: 8,
+          mt: `${appBarHeight}px`,
           mb: `${bottomControlHeight}px`,
-          height: `calc(100vh - 64px - ${bottomControlHeight}px)`,
+          height: `calc(100vh - ${appBarHeight}px - ${bottomControlHeight}px)`,
           overflow: 'hidden'
         }}
       >
         {children}
       </Box>
       
-      <BottomControl />
+      <BottomControl drawerWidth={drawerWidth} minDrawerWidth={minDrawerWidth} />
     </Box>
   );
 }

@@ -2,10 +2,12 @@ import React from 'react';
 import { Paper, Box, Typography, IconButton, Tooltip, useTheme, useMediaQuery } from '@mui/material';
 import { Settings, HelpCircle, Bell } from 'lucide-react';
 
-const drawerWidth = 240;
-const minDrawerWidth = 73;
+interface BottomControlProps {
+  drawerWidth: number;
+  minDrawerWidth: number;
+}
 
-export default function BottomControl() {
+export default function BottomControl({ drawerWidth, minDrawerWidth }: BottomControlProps) {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -34,30 +36,33 @@ export default function BottomControl() {
           alignItems: 'center',
           justifyContent: 'space-between',
           px: 2,
-          py: 1,
-          height: 48
+          height: 32,
         }}
       >
-        <Typography variant="body2" color="text.secondary">
+        <Typography 
+          variant="caption" 
+          color="text.secondary"
+          sx={{ fontSize: '0.7rem' }}
+        >
           © {new Date().getFullYear()} Your Company
         </Typography>
         
-        <Box sx={{ display: 'flex', gap: 1 }}>
+        <Box sx={{ display: 'flex', gap: 0.5 }}>
           <Tooltip title="Notifications">
-            <IconButton size="small" color="inherit">
-              <Bell size={20} />
+            <IconButton size="small" color="inherit" sx={{ p: 0.5 }}>
+              <Bell size={16} />
             </IconButton>
           </Tooltip>
           
           <Tooltip title="Help">
-            <IconButton size="small" color="inherit">
-              <HelpCircle size={20} />
+            <IconButton size="small" color="inherit" sx={{ p: 0.5 }}>
+              <HelpCircle size={16} />
             </IconButton>
           </Tooltip>
           
           <Tooltip title="Settings">
-            <IconButton size="small" color="inherit">
-              <Settings size={20} />
+            <IconButton size="small" color="inherit" sx={{ p: 0.5 }}>
+              <Settings size={16} />
             </IconButton>
           </Tooltip>
         </Box>

@@ -2,36 +2,36 @@ import { createTheme } from '@mui/material/styles';
 
 export const theme = createTheme({
   typography: {
-    fontSize: 12, // Base font size changed to 12px
+    fontSize: 12,
     h1: {
-      fontSize: '2.25rem', // 27px
+      fontSize: '2.25rem',
     },
     h2: {
-      fontSize: '1.875rem', // 22.5px
+      fontSize: '1.875rem',
     },
     h3: {
-      fontSize: '1.5rem', // 18px
+      fontSize: '1.5rem',
     },
     h4: {
-      fontSize: '1.25rem', // 15px
+      fontSize: '1.25rem',
     },
     h5: {
-      fontSize: '1.125rem', // 13.5px
+      fontSize: '1.125rem',
     },
     h6: {
-      fontSize: '1rem', // 12px
+      fontSize: '1rem',
     },
     body1: {
-      fontSize: '0.833rem', // 10px
+      fontSize: '0.833rem',
     },
     body2: {
-      fontSize: '0.75rem', // 9px
+      fontSize: '0.75rem',
     },
     button: {
-      fontSize: '0.833rem', // 10px
+      fontSize: '0.833rem',
     },
     caption: {
-      fontSize: '0.667rem', // 8px
+      fontSize: '0.667rem',
     },
   },
   palette: {
@@ -42,6 +42,25 @@ export const theme = createTheme({
     },
     background: {
       default: '#f5f5f5',
+    },
+  },
+  components: {
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          minHeight: 48,
+        },
+      },
+    },
+    MuiToolbar: {
+      styleOverrides: {
+        regular: {
+          minHeight: 48,
+          '@media (min-width: 600px)': {
+            minHeight: 48,
+          },
+        },
+      },
     },
   },
 });

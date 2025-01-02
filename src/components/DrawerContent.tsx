@@ -24,11 +24,11 @@ export default function DrawerContent({ isDrawerOpen, toggleDrawer }: DrawerCont
   const location = useLocation();
 
   const menuItems = [
-    { text: 'Home', icon: <Home />, path: '/' },
-    { text: 'Grid', icon: <GridIcon />, path: '/grid' },
-    { text: 'Employees', icon: <UserCircle />, path: '/employees' },
-    { text: 'Contacts', icon: <Users />, path: '/contacts' },
-    { text: 'Login', icon: <LogIn />, path: '/login' }
+    { text: 'Home', icon: <Home size={18} />, path: '/' },
+    { text: 'Grid', icon: <GridIcon size={18} />, path: '/grid' },
+    { text: 'Employees', icon: <UserCircle size={18} />, path: '/employees' },
+    { text: 'Contacts', icon: <Users size={18} />, path: '/contacts' },
+    { text: 'Login', icon: <LogIn size={18} />, path: '/login' }
   ];
 
   return (
@@ -41,22 +41,30 @@ export default function DrawerContent({ isDrawerOpen, toggleDrawer }: DrawerCont
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'flex-end',
+        minHeight: 48, // Reduced from default 64px
         px: [1]
       }}>
-        <IconButton onClick={toggleDrawer}>
-          {isDrawerOpen ? <ChevronLeft /> : <ChevronRight />}
+        <IconButton onClick={toggleDrawer} size="small">
+          {isDrawerOpen ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
         </IconButton>
       </Toolbar>
-      <List sx={{ flex: '1 1 auto', overflowY: 'auto' }}>
+      <List 
+        sx={{ 
+          flex: '1 1 auto', 
+          overflowY: 'auto',
+          py: 0.5 // Reduced padding
+        }}
+      >
         {menuItems.map((item) => (
-          <ListItem key={item.text} disablePadding>
+          <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
             <ListItemButton 
               onClick={() => navigate(item.path)}
               selected={location.pathname === item.path}
               sx={{
-                minHeight: 48,
+                minHeight: 36, // Reduced from 48px
                 justifyContent: isDrawerOpen ? 'initial' : 'center',
-                px: 2.5,
+                px: 2,
+                py: 0.5, // Added vertical padding
                 '&.Mui-selected': {
                   backgroundColor: theme.palette.primary.light,
                   '&:hover': {
@@ -68,7 +76,7 @@ export default function DrawerContent({ isDrawerOpen, toggleDrawer }: DrawerCont
               <ListItemIcon 
                 sx={{ 
                   minWidth: 0,
-                  mr: isDrawerOpen ? 3 : 'auto',
+                  mr: isDrawerOpen ? 2 : 'auto',
                   justifyContent: 'center',
                   color: location.pathname === item.path ? theme.palette.primary.main : 'inherit'
                 }}
@@ -78,6 +86,10 @@ export default function DrawerContent({ isDrawerOpen, toggleDrawer }: DrawerCont
               {isDrawerOpen && (
                 <ListItemText 
                   primary={item.text} 
+                  primaryTypographyProps={{
+                    fontSize: '0.875rem',
+                    fontWeight: location.pathname === item.path ? 500 : 400
+                  }}
                   sx={{ opacity: 1 }}
                 />
               )}
