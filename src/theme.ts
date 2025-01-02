@@ -28,7 +28,8 @@ export const theme = createTheme({
       fontSize: '0.75rem',
     },
     button: {
-      fontSize: '0.833rem',
+      fontSize: '0.6875rem', // 11px
+      textTransform: 'none',
     },
     caption: {
       fontSize: '0.667rem',
@@ -45,6 +46,17 @@ export const theme = createTheme({
     },
   },
   components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          fontSize: '0.6875rem', // 11px
+          padding: '6px 16px',
+        },
+        sizeSmall: {
+          fontSize: '0.6875rem', // 11px
+        },
+      },
+    },
     MuiAppBar: {
       styleOverrides: {
         root: {
