@@ -1,26 +1,17 @@
 import React from 'react';
 import { Box, Typography, TextField, Button, Stack, InputAdornment, IconButton } from '@mui/material';
-import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { accountSchema, AccountFormData } from '../schemas/account';
+import { useAccount } from '../hooks/useAccount';
 import { Eye, EyeOff } from 'lucide-react';
 
 export default function Account() {
-  const [showPassword, setShowPassword] = React.useState(false);
-  const { control, handleSubmit, formState: { errors } } = useForm<AccountFormData>({
-    resolver: yupResolver(accountSchema),
-    defaultValues: {
-      firstName: '',
-      lastName: '',
-      username: '',
-      password: ''
-    }
-  });
-
-  const onSubmit = (data: AccountFormData) => {
-    console.log('Form data:', data);
-    // Add your form submission logic here
-  };
+  const {
+    control,
+    errors,
+    showPassword,
+    handleSubmit,
+    onSubmit,
+    togglePasswordVisibility
+  } = useAccount();
 
   return (
     <Box sx={{ maxWidth: 600, mx: 'auto', p: 3 }}>
@@ -91,7 +82,7 @@ export default function Account() {
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
-                        onClick={() => setShowPassword(!showPassword)}
+                        onClick={togglePasswordVisibility}
                         edge="end"
                         size="small"
                       >
