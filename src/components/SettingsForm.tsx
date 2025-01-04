@@ -55,6 +55,11 @@ export function SettingsForm({ open, onClose }: SettingsFormProps) {
               />
             }
             label="Dark Mode"
+            sx={{
+              '& .MuiFormControlLabel-label': {
+                fontSize: '14px'
+              }
+            }}
           />
           {/* Add more settings here */}
         </Stack>
