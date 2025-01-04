@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Employees from './pages/Employees';
 import Contacts from './pages/Contacts';
+import Account from './pages/Account';
 import { theme } from './theme';
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/employees" element={<Employees />} />
             <Route path="/contacts" element={<Contacts />} />
+            <Route path="/account" element={<Account />} />
           </Routes>
         </Layout>
       </BrowserRouter>
