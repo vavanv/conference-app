@@ -19,9 +19,11 @@ export function CustomGridToolbar({ onAdd, addButtonText }: CustomGridToolbarPro
           onClick={onAdd}
           size="small"
           sx={{
+            border: 'none',
             backgroundColor: 'transparent',
             '&:hover': {
-              backgroundColor: 'rgba(0, 0, 0, 0.04)'
+              backgroundColor: 'rgba(0, 0, 0, 0.04)',
+              border: 'none'
             }
           }}
         >
