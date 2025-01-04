@@ -17,7 +17,8 @@ export function useAccount() {
       firstName: '',
       lastName: '',
       username: '',
-      password: ''
+      password: '',
+      accountType: 'user' // Default to user
     }
   });
 

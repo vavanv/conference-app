@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Typography, TextField, Button, Stack, InputAdornment, IconButton } from '@mui/material';
+import { Box, Typography, TextField, Button, Stack, InputAdornment, IconButton, MenuItem } from '@mui/material';
+import { useForm, Controller } from 'react-hook-form'; // Add Controller import
 import { useAccount } from '../hooks/useAccount';
 import { Eye, EyeOff } from 'lucide-react';
 
@@ -92,6 +93,26 @@ export default function Account() {
                   )
                 }}
               />
+            )}
+          />
+
+          <Controller
+            name="accountType"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                select
+                label="Account Type"
+                error={!!errors.accountType}
+                helperText={errors.accountType?.message}
+                fullWidth
+                size="small"
+              >
+                <MenuItem value="admin">Admin</MenuItem>
+                <MenuItem value="user">User</MenuItem>
+                <MenuItem value="contact">Contact</MenuItem>
+              </TextField>
             )}
           />
 

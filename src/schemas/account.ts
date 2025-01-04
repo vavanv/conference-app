@@ -12,7 +12,10 @@ export const accountSchema = yup.object({
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
       'Password must contain at least one uppercase letter, one lowercase letter, and one number'
-    )
+    ),
+  accountType: yup.string()
+    .required('Account type is required')
+    .oneOf(['admin', 'user', 'contact'], 'Invalid account type')
 });
 
 export type AccountFormData = yup.InferType<typeof accountSchema>;
