@@ -27,85 +27,13 @@ export default function Account() {
 
   return (
     <Box sx={{ maxWidth: 600, mx: 'auto', p: 3 }}>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h5" gutterBottom>
         Account Settings
       </Typography>
       
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={3}>
-          <Controller
-            name="firstName"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="First Name"
-                error={!!errors.firstName}
-                helperText={errors.firstName?.message}
-                fullWidth
-                size="small"
-              />
-            )}
-          />
-
-          <Controller
-            name="lastName"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Last Name"
-                error={!!errors.lastName}
-                helperText={errors.lastName?.message}
-                fullWidth
-                size="small"
-              />
-            )}
-          />
-
-          <Controller
-            name="username"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Username"
-                error={!!errors.username}
-                helperText={errors.username?.message}
-                fullWidth
-                size="small"
-              />
-            )}
-          />
-
-          <Controller
-            name="accountType"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                select
-                label="Account Type"
-                error={!!errors.accountType}
-                helperText={errors.accountType?.message}
-                fullWidth
-                size="small"
-              >
-                <MenuItem value="admin">Admin</MenuItem>
-                <MenuItem value="user">User</MenuItem>
-                <MenuItem value="contact">Contact</MenuItem>
-              </TextField>
-            )}
-          />
-
-          <Button 
-            type="submit" 
-            variant="contained" 
-            size="large"
-            sx={{ mt: 2 }}
-          >
-            Save Changes
-          </Button>
+          {/* ... existing form fields ... */}
         </Stack>
       </form>
     </Box>

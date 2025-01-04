@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Paper } from '@mui/material';
+import { Box, Paper, Typography } from '@mui/material';
 import { LoginForm } from '../components/auth/LoginForm';
 
 export default function Login() {
@@ -19,6 +19,9 @@ export default function Login() {
           bgcolor: 'background.paper'
         }}
       >
+        <Typography variant="h5" align="center" gutterBottom>
+          Sign In
+        </Typography>
         <LoginForm />
       </Paper>
     </Box>

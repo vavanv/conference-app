@@ -5,7 +5,7 @@ import { ContactsGrid } from '../components/contacts/ContactsGrid';
 export default function Contacts() {
   return (
     <Box>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h5" gutterBottom>
         Contacts
       </Typography>
       <ContactsGrid />
