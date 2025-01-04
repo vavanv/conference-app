@@ -1,18 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Typography, TextField, Button, Stack, InputAdornment, IconButton, MenuItem } from '@mui/material';
-import { useForm, Controller } from 'react-hook-form'; // Add Controller import
-import { useAccount } from '../hooks/useAccount';
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { accountSchema, AccountFormData } from '../schemas/account';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { updateAccount } from '../store/slices/accountSlice';
 import { Eye, EyeOff } from 'lucide-react';
 
 export default function Account() {
-  const {
-    control,
-    errors,
-    showPassword,
-    handleSubmit,
-    onSubmit,
-    togglePasswordVisibility
-  } = useAccount();
+  const [showPassword, setShowPassword] = React.useState(false);
+  const dispatch = useAppDispatch();
+  const account = useAppSelector(state => state.account);
+  
+  const { control, handleSubmit, formState: { errors }, reset } = useForm<AccountFormData>({
+    resolver: yupResolver(accountSchema),
+    defaultValues: account
+  });
+
+  useEffect(() => {
+    reset(account);
+  }, [account, reset]);
+
+  const onSubmit = (data: AccountFormData) => {
+    dispatch(updateAccount(data));
+  };
 
   return (
     <Box sx={{ maxWidth: 600, mx: 'auto', p: 3 }}>
@@ -63,35 +74,6 @@ export default function Account() {
                 helperText={errors.username?.message}
                 fullWidth
                 size="small"
-              />
-            )}
-          />
-
-          <Controller
-            name="password"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                type={showPassword ? 'text' : 'password'}
-                label="Password"
-                error={!!errors.password}
-                helperText={errors.password?.message}
-                fullWidth
-                size="small"
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        onClick={togglePasswordVisibility}
-                        edge="end"
-                        size="small"
-                      >
-                        {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                      </IconButton>
-                    </InputAdornment>
-                  )
-                }}
               />
             )}
           />
