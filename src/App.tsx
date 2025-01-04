@@ -1,17 +1,20 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ThemeProvider, CssBaseline } from '@mui/material';
+import { ThemeProvider as MuiThemeProvider, CssBaseline } from '@mui/material';
+import { ThemeProvider, useThemeContext } from './context/ThemeContext'; // Add useThemeContext import
+import { getTheme } from './theme';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Employees from './pages/Employees';
 import Contacts from './pages/Contacts';
 import Account from './pages/Account';
-import { theme } from './theme';
 
-export default function App() {
+const ThemeWrapper = () => {
+  const { themeMode } = useThemeContext();
+  
   return (
-    <ThemeProvider theme={theme}>
+    <MuiThemeProvider theme={getTheme(themeMode)}>
       <CssBaseline />
       <BrowserRouter>
         <Layout>
@@ -24,6 +27,14 @@ export default function App() {
           </Routes>
         </Layout>
       </BrowserRouter>
+    </MuiThemeProvider>
+  );
+};
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <ThemeWrapper />
     </ThemeProvider>
   );
 }

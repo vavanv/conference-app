@@ -1,97 +1,51 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, Theme } from '@mui/material/styles';
 
-export const theme = createTheme({
-  typography: {
-    fontSize: 12,
-    h1: {
-      fontSize: '2.25rem',
-    },
-    h2: {
-      fontSize: '1.875rem',
-    },
-    h3: {
-      fontSize: '1.5rem',
-    },
-    h4: {
-      fontSize: '1.25rem',
-    },
-    h5: {
-      fontSize: '1.125rem',
-    },
-    h6: {
-      fontSize: '1rem',
-    },
-    body1: {
-      fontSize: '0.833rem',
-    },
-    body2: {
-      fontSize: '0.75rem',
-    },
-    button: {
-      fontSize: '0.6875rem', // 11px
-      textTransform: 'uppercase',
-    },
-    caption: {
-      fontSize: '0.667rem',
-    },
-  },
+const lightTheme = createTheme({
   palette: {
+    mode: 'light',
     primary: {
-      main: '#9e9e9e',
-      light: '#cfcfcf',
-      dark: '#707070',
+      main: '#1976d2',
+    },
+    secondary: {
+      main: '#9c27b0',
     },
     background: {
       default: '#f5f5f5',
+      paper: '#ffffff',
     },
+  },
+  typography: {
+    // Your existing typography settings
   },
   components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          fontSize: '0.6875rem', // 11px
-          padding: '6px 16px',
-          textTransform: 'uppercase',
-        },
-        sizeSmall: {
-          fontSize: '0.6875rem', // 11px
-        },
-      },
+    // Your existing component overrides
+  }
+});
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#90caf9',
     },
-    MuiAppBar: {
-      styleOverrides: {
-        root: {
-          minHeight: 48,
-        },
-      },
+    secondary: {
+      main: '#ce93d8',
     },
-    MuiToolbar: {
-      styleOverrides: {
-        regular: {
-          minHeight: 48,
-          '@media (min-width: 600px)': {
-            minHeight: 48,
-          },
-        },
-      },
-    },
-    MuiTextField: {
-      defaultProps: {
-        variant: 'standard',
-      },
-      styleOverrides: {
-        root: {
-          '& .MuiInputBase-root': {
-            fontSize: '0.875rem',
-          },
-          '& .MuiInputLabel-root': {
-            fontSize: '0.875rem',
-          },
-          '& .MuiFormHelperText-root': {
-            fontSize: '0.75rem',
-          },
-        },
-      },
+    background: {
+      default: '#121212',
+      paper: '#1e1e1e',
     },
   },
+  typography: {
+    // Your existing typography settings
+  },
+  components: {
+    // Your existing component overrides
+  }
 });
+
+export type ThemeMode = 'light' | 'dark';
+
+export const getTheme = (mode: ThemeMode): Theme => {
+  return mode === 'light' ? lightTheme : darkTheme;
+};
