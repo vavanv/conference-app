@@ -33,7 +33,108 @@ export default function Account() {
       
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={3}>
-          {/* ... existing form fields ... */}
+          <Controller
+            name="firstName"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label="First Name"
+                error={!!errors.firstName}
+                helperText={errors.firstName?.message}
+                fullWidth
+                size="small"
+              />
+            )}
+          />
+
+          <Controller
+            name="lastName"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label="Last Name"
+                error={!!errors.lastName}
+                helperText={errors.lastName?.message}
+                fullWidth
+                size="small"
+              />
+            )}
+          />
+
+          <Controller
+            name="username"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label="Username"
+                error={!!errors.username}
+                helperText={errors.username?.message}
+                fullWidth
+                size="small"
+              />
+            )}
+          />
+
+          <Controller
+            name="password"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                type={showPassword ? 'text' : 'password'}
+                label="Password"
+                error={!!errors.password}
+                helperText={errors.password?.message}
+                fullWidth
+                size="small"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowPassword(!showPassword)}
+                        edge="end"
+                        size="small"
+                      >
+                        {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
+              />
+            )}
+          />
+
+          <Controller
+            name="accountType"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                select
+                label="Account Type"
+                error={!!errors.accountType}
+                helperText={errors.accountType?.message}
+                fullWidth
+                size="small"
+              >
+                <MenuItem value="admin">Admin</MenuItem>
+                <MenuItem value="user">User</MenuItem>
+                <MenuItem value="contact">Contact</MenuItem>
+              </TextField>
+            )}
+          />
+
+          <Button 
+            type="submit" 
+            variant="contained" 
+            size="large"
+            sx={{ mt: 2 }}
+          >
+            Save Changes
+          </Button>
         </Stack>
       </form>
     </Box>
