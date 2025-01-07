@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Employees from './pages/Employees';
 import Contacts from './pages/Contacts';
+import Companies from './pages/Companies';
 import Account from './pages/Account';
 
 const ThemeWrapper = () => {
@@ -23,6 +24,7 @@ const ThemeWrapper = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/employees" element={<Employees />} />
             <Route path="/contacts" element={<Contacts />} />
+            <Route path="/companies" element={<Companies />} />
             <Route path="/account" element={<Account />} />
           </Routes>
         </Layout>
