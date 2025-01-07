@@ -6,10 +6,7 @@ import { getTheme } from './theme';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import Organizations from './pages/Organizations';
-import Events from './pages/Events';
-import Speakers from './pages/Speakers';
-import Attendance from './pages/Attendance'; // Added import
+import Employees from './pages/Employees';
 import Contacts from './pages/Contacts';
 import Account from './pages/Account';
 
@@ -24,10 +21,7 @@ const ThemeWrapper = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/organizations" element={<Organizations />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/speakers" element={<Speakers />} />
-            <Route path="/attendance" element={<Attendance />} /> {/* Added route */}
+            <Route path="/employees" element={<Employees />} />
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/account" element={<Account />} />
           </Routes>

@@ -6,12 +6,3 @@ export const formatCurrency = (value: number): string => {
     maximumFractionDigits: 0,
   }).format(value);
 };
-
-export const formatDate = (dateString: string): string => {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric'
-  });
-};

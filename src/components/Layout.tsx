@@ -1,49 +1,89 @@
 import React, { useState } from 'react';
-import { Box, Drawer, AppBar, Toolbar, Typography, IconButton } from '@mui/material';
+import { 
+  Box, 
+  Drawer, 
+  AppBar, 
+  Toolbar, 
+  Typography, 
+  IconButton,
+  useTheme,
+  alpha
+} from '@mui/material';
 import { Menu as MenuIcon } from 'lucide-react';
+import DrawerContent from './DrawerContent';
+import BottomControl from './common/BottomControl';
 
 const drawerWidth = 240;
+const minDrawerWidth = 56;
+const bottomControlHeight = 32;
+const appBarHeight = 48;
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(true);
+  const theme = useTheme();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
+
   return (
-    <Box sx={{ display: 'flex' }}>
-      {/* AppBar */}
-      <AppBar
-        position="fixed"
-        sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
+    <Box sx={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
+      <AppBar 
+        position="fixed" 
+        elevation={0}
+        sx={{ 
+          width: { sm: `calc(100% - ${isDrawerOpen ? drawerWidth : minDrawerWidth}px)` },
+          ml: { sm: isDrawerOpen ? `${drawerWidth}px` : `${minDrawerWidth}px` },
+          transition: theme.transitions.create(['width', 'margin'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+          }),
+          bgcolor: 'background.paper',
+          borderBottom: '1px solid',
+          borderColor: 'divider',
         }}
       >
-        <Toolbar>
+        <Toolbar sx={{ minHeight: appBarHeight }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+            sx={{ 
+              mr: 2, 
+              display: { sm: 'none' },
+              color: 'text.secondary'
+            }}
           >
-            <MenuIcon />
+            <MenuIcon size={18} />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography 
+            variant="subtitle1" 
+            noWrap 
+            component="div"
+            sx={{ color: 'text.secondary' }}
+          >
             Conference Management
           </Typography>
         </Toolbar>
       </AppBar>
 
-      {/* Drawer */}
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
+        sx={{ 
+          width: { sm: isDrawerOpen ? drawerWidth : minDrawerWidth },
+          flexShrink: { sm: 0 },
+          transition: theme.transitions.create('width', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+          }),
+        }}
       >
-        {/* Mobile Drawer */}
         <Drawer
           variant="temporary"
           open={mobileOpen}
@@ -51,43 +91,60 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           ModalProps={{ keepMounted: true }}
           sx={{
             display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            '& .MuiDrawer-paper': { 
+              boxSizing: 'border-box',
+              width: drawerWidth,
+              transition: theme.transitions.create('width', {
+                easing: theme.transitions.easing.sharp,
+                duration: theme.transitions.duration.enteringScreen,
+              }),
+            },
           }}
         >
-          <Box sx={{ p: 2 }}>
-            <Typography variant="h6">Menu</Typography>
-            {/* Add your menu items here */}
-          </Box>
+          <DrawerContent isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
         </Drawer>
-
-        {/* Desktop Drawer */}
+        
         <Drawer
           variant="permanent"
           sx={{
             display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            '& .MuiDrawer-paper': { 
+              boxSizing: 'border-box',
+              width: isDrawerOpen ? drawerWidth : minDrawerWidth,
+              borderRight: '1px solid rgba(0, 0, 0, 0.12)',
+              overflowX: 'hidden',
+              transition: theme.transitions.create('width', {
+                easing: theme.transitions.easing.sharp,
+                duration: theme.transitions.duration.enteringScreen,
+              }),
+            },
           }}
-          open
+          open={isDrawerOpen}
         >
-          <Box sx={{ p: 2 }}>
-            <Typography variant="h6">Menu</Typography>
-            {/* Add your menu items here */}
-          </Box>
+          <DrawerContent isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
         </Drawer>
       </Box>
 
-      {/* Main Content */}
       <Box
         component="main"
         sx={{
           flexGrow: 1,
           p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          width: { sm: `calc(100% - ${isDrawerOpen ? drawerWidth : minDrawerWidth}px)` },
+          transition: theme.transitions.create('width', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+          }),
+          mt: `${appBarHeight}px`,
+          mb: `${bottomControlHeight}px`,
+          height: `calc(100vh - ${appBarHeight}px - ${bottomControlHeight}px)`,
+          overflow: 'hidden'
         }}
       >
-        <Toolbar /> {/* This creates space below the AppBar */}
         {children}
       </Box>
+      
+      <BottomControl drawerWidth={drawerWidth} minDrawerWidth={minDrawerWidth} />
     </Box>
   );
 }
