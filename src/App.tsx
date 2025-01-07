@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Organizations from './pages/Organizations';
 import Events from './pages/Events';
 import Speakers from './pages/Speakers';
+import Attendance from './pages/Attendance'; // Added import
 import Contacts from './pages/Contacts';
 import Account from './pages/Account';
 
@@ -26,6 +27,7 @@ const ThemeWrapper = () => {
             <Route path="/organizations" element={<Organizations />} />
             <Route path="/events" element={<Events />} />
             <Route path="/speakers" element={<Speakers />} />
+            <Route path="/attendance" element={<Attendance />} /> {/* Added route */}
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/account" element={<Account />} />
           </Routes>
