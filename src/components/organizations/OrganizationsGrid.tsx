@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import { Box } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { Organization, OrganizationFormData } from '../../types/organization';
-import { OrganizationForm } from './OrganizationForm'; // Changed import
+import { OrganizationForm } from './OrganizationForm';
 import { ConfirmDialog } from '../common/ConfirmDialog';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import { addOrganization, updateOrganization, deleteOrganization } from '../../store/slices/organizationsSlice';
 import { getOrganizationColumns } from './columns';
 import { CustomGridToolbar } from '../common/CustomGridToolbar';
 
-export function OrganizationsGrid() {
+// Changed to default export
+export default function OrganizationsGrid() {
   const dispatch = useAppDispatch();
   const organizations = useAppSelector(state => state.organizations.items);
   const [isAddOpen, setIsAddOpen] = useState(false);

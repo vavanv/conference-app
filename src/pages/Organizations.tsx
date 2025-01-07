@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography, Box } from '@mui/material';
-import OrganizationsGrid from '../components/organizations/OrganizationsGrid';
+import OrganizationsGrid from '../components/organizations/OrganizationsGrid'; // Updated import
 
 export default function Organizations() {
   return (
