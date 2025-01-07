@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { Organization, OrganizationFormData } from '../../types/organization';
-import OrganizationForm from './OrganizationForm';
+import { OrganizationForm } from './OrganizationForm'; // Changed import
 import { ConfirmDialog } from '../common/ConfirmDialog';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import { addOrganization, updateOrganization, deleteOrganization } from '../../store/slices/organizationsSlice';
