@@ -9,7 +9,7 @@ import {
   IconButton,
   useTheme
 } from '@mui/material';
-import { Home, LogIn, ChevronLeft, ChevronRight, Users, UserCircle, Settings } from 'lucide-react';
+import { Home, LogIn, ChevronLeft, ChevronRight, Users, UserCircle, Settings, Building, Calendar, Mic } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Copyright from './Copyright';
 
@@ -25,7 +25,9 @@ export default function DrawerContent({ isDrawerOpen, toggleDrawer }: DrawerCont
 
   const menuItems = [
     { text: 'Home', icon: <Home size={18} />, path: '/' },
-    { text: 'Employees', icon: <UserCircle size={18} />, path: '/employees' },
+    { text: 'Organizations', icon: <Building size={18} />, path: '/organizations' },
+    { text: 'Events', icon: <Calendar size={18} />, path: '/events' },
+    { text: 'Speakers', icon: <Mic size={18} />, path: '/speakers' },
     { text: 'Contacts', icon: <Users size={18} />, path: '/contacts' },
     { text: 'Account', icon: <Settings size={18} />, path: '/account' },
     { text: 'Login', icon: <LogIn size={18} />, path: '/login' }

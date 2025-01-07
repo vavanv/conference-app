@@ -1,12 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
-import employeesReducer from './slices/employeesSlice';
+import organizationsReducer from './slices/organizationsSlice';
+import eventsReducer from './slices/eventsSlice';
+import speakersReducer from './slices/speakersSlice';
 import contactsReducer from './slices/contactsSlice';
 import authReducer from './slices/authSlice';
 import accountReducer from './slices/accountSlice';
 
 export const store = configureStore({
   reducer: {
-    employees: employeesReducer,
+    organizations: organizationsReducer,
+    events: eventsReducer,
+    speakers: speakersReducer,
     contacts: contactsReducer,
     auth: authReducer,
     account: accountReducer

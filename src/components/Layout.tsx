@@ -68,7 +68,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             component="div"
             sx={{ color: 'text.secondary' }}
           >
-            My App
+            Conference Management
           </Typography>
         </Toolbar>
       </AppBar>
