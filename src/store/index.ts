@@ -4,6 +4,7 @@ import contactsReducer from './slices/contactsSlice';
 import authReducer from './slices/authSlice';
 import accountReducer from './slices/accountSlice';
 import companiesReducer from './slices/companiesSlice';
+import eventsReducer from './slices/eventsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
     contacts: contactsReducer,
     auth: authReducer,
     account: accountReducer,
-    companies: companiesReducer
+    companies: companiesReducer,
+    events: eventsReducer
   },
 });
 

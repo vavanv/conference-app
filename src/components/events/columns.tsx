@@ -2,7 +2,6 @@ import { GridColDef, GridActionsCellItem } from '@mui/x-data-grid';
 import { Edit2, Trash2 } from 'lucide-react';
 import { Box } from '@mui/material';
 import { Event } from '../../types/event';
-import { formatDate } from '../../utils/formatters';
 
 export const getEventColumns = (
   onEdit: (event: Event) => void,
@@ -10,16 +9,23 @@ export const getEventColumns = (
 ): GridColDef[] => [
   { 
     field: 'name', 
-    headerName: 'Event Name', 
-    flex: 1.5,
+    headerName: 'Name', 
+    flex: 1,
     minWidth: 200
   },
   { 
-    field: 'date', 
-    headerName: 'Date', 
+    field: 'startDate', 
+    headerName: 'Start Date', 
     flex: 1,
-    minWidth: 120,
-    valueFormatter: (params) => formatDate(params.value)
+    minWidth: 150,
+    valueFormatter: (params) => new Date(params.value).toLocaleString()
+  },
+  { 
+    field: 'endDate', 
+    headerName: 'End Date', 
+    flex: 1,
+    minWidth: 150,
+    valueFormatter: (params) => new Date(params.value).toLocaleString()
   },
   { 
     field: 'location', 
@@ -44,8 +50,12 @@ export const getEventColumns = (
           px: 2,
           py: 0.5,
           borderRadius: 1,
-          bgcolor: params.value === 'active' ? 'success.light' : 'error.light',
-          color: params.value === 'active' ? 'success.dark' : 'error.dark',
+          bgcolor: params.value === 'cancelled' ? 'error.light' : 
+                   params.value === 'completed' ? 'success.light' :
+                   params.value === 'ongoing' ? 'warning.light' : 'info.light',
+          color: params.value === 'cancelled' ? 'error.dark' : 
+                 params.value === 'completed' ? 'success.dark' :
+                 params.value === 'ongoing' ? 'warning.dark' : 'info.dark',
           textTransform: 'capitalize'
         }}
       >

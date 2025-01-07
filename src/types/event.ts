@@ -1,10 +1,12 @@
 export interface Event {
   id: string;
   name: string;
-  date: string;
+  description: string;
+  startDate: string;
+  endDate: string;
   location: string;
   organizer: string;
-  status: 'active' | 'inactive';
+  status: 'scheduled' | 'ongoing' | 'completed' | 'cancelled';
 }
 
 export interface EventFormData extends Omit<Event, 'id'> {}
