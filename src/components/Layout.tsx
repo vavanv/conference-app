@@ -101,7 +101,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             },
           }}
         >
-          <DrawerContent isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
+          <DrawerContent isDrawerOpen={true} toggleDrawer={toggleDrawer} />
         </Drawer>
         
         <Drawer
@@ -119,7 +119,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               }),
             },
           }}
-          open={isDrawerOpen}
+          open
         >
           <DrawerContent isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
         </Drawer>
