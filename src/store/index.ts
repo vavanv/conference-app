@@ -6,6 +6,7 @@ import accountReducer from './slices/accountSlice';
 import companiesReducer from './slices/companiesSlice';
 import eventsReducer from './slices/eventsSlice';
 import attendanceReducer from './slices/attendanceSlice';
+import presentersReducer from './slices/presentersSlice';
 
 export const store = configureStore({
   reducer: {
@@ -15,7 +16,8 @@ export const store = configureStore({
     account: accountReducer,
     companies: companiesReducer,
     events: eventsReducer,
-    attendance: attendanceReducer
+    attendance: attendanceReducer,
+    presenters: presentersReducer
   },
 });
 

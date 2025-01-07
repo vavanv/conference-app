@@ -12,6 +12,7 @@ import Companies from './pages/Companies';
 import Events from './pages/Events';
 import Attendance from './pages/Attendance';
 import Account from './pages/Account';
+import Presenters from './pages/Presenters';
 
 const ThemeWrapper = () => {
   const { themeMode } = useThemeContext();
@@ -30,6 +31,7 @@ const ThemeWrapper = () => {
             <Route path="/events" element={<Events />} />
             <Route path="/attendance" element={<Attendance />} />
             <Route path="/account" element={<Account />} />
+            <Route path="/presenters" element={<Presenters />} />
           </Routes>
         </Layout>
       </BrowserRouter>
