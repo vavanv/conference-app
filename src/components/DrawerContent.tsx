@@ -37,5 +37,68 @@ export default function DrawerContent({ isDrawerOpen, toggleDrawer }: DrawerCont
     { text: 'Login', icon: <LogIn size={18} />, path: '/login' }
   ];
 
-  // ... rest of the component code ...
+  return (
+    <>
+      <Toolbar sx={{ 
+        display: 'flex', 
+        alignItems: 'center',
+        justifyContent: isDrawerOpen ? 'flex-end' : 'center',
+        px: [1],
+        minHeight: '48px !important'
+      }}>
+        <IconButton onClick={toggleDrawer}>
+          {isDrawerOpen ? <ChevronLeft /> : <ChevronRight />}
+        </IconButton>
+      </Toolbar>
+      
+      <List>
+        {menuItems.map((item) => (
+          <ListItem 
+            key={item.text} 
+            disablePadding 
+            sx={{ 
+              display: 'block',
+              '&:hover': {
+                backgroundColor: theme.palette.action.hover
+              }
+            }}
+          >
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: isDrawerOpen ? 'initial' : 'center',
+                px: 2.5,
+              }}
+              onClick={() => navigate(item.path)}
+              selected={location.pathname === item.path}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: isDrawerOpen ? 3 : 'auto',
+                  justifyContent: 'center',
+                  color: location.pathname === item.path ? 
+                    theme.palette.primary.main : 
+                    theme.palette.text.secondary
+                }}
+              >
+                {item.icon}
+              </ListItemIcon>
+              <ListItemText 
+                primary={item.text} 
+                sx={{ 
+                  opacity: isDrawerOpen ? 1 : 0,
+                  color: location.pathname === item.path ? 
+                    theme.palette.primary.main : 
+                    theme.palette.text.secondary
+                }} 
+              />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      
+      <Copyright isDrawerOpen={isDrawerOpen} />
+    </>
+  );
 }
