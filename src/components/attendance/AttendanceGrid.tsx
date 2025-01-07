@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { Box } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { Attendance, AttendanceFormData } from '../../types/attendance';
-import AttendanceForm from './AttendanceForm';
+import { AttendanceForm } from './AttendanceForm';
 import { ConfirmDialog } from '../common/ConfirmDialog';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import { addAttendance, updateAttendance, deleteAttendance } from '../../store/slices/attendanceSlice';
 import { getAttendanceColumns } from './columns';
 import { CustomGridToolbar } from '../common/CustomGridToolbar';
 
-export default function AttendanceGrid() {
+export function AttendanceGrid() {
   const dispatch = useAppDispatch();
-  const attendanceRecords = useAppSelector(state => state.attendance.items);
+  const attendance = useAppSelector(state => state.attendance.items);
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [editAttendance, setEditAttendance] = useState<Attendance | null>(null);
   const [deleteAttendanceId, setDeleteAttendanceId] = useState<string | null>(null);
@@ -48,7 +48,7 @@ export default function AttendanceGrid() {
   };
 
   const columns = getAttendanceColumns(handleEdit, handleDeleteClick);
-  const attendanceToDelete = attendanceRecords.find(a => a.id === deleteAttendanceId);
+  const attendanceToDelete = attendance.find(a => a.id === deleteAttendanceId);
 
   return (
     <Box sx={{ 
@@ -58,7 +58,7 @@ export default function AttendanceGrid() {
     }}>      
       <Box sx={{ flex: 1, width: '100%', overflow: 'hidden' }}>
         <DataGrid
-          rows={attendanceRecords}
+          rows={attendance}
           columns={columns}
           density="compact"
           components={{
@@ -107,7 +107,7 @@ export default function AttendanceGrid() {
       <ConfirmDialog
         open={!!deleteAttendanceId}
         title="Delete Attendance"
-        message={attendanceToDelete ? `Are you sure you want to delete this attendance record?` : ''}
+        message={attendanceToDelete ? `Are you sure you want to delete attendance record for ${attendanceToDelete.employeeName}?` : ''}
         confirmLabel="Delete"
         onConfirm={handleDeleteConfirm}
         onCancel={() => setDeleteAttendanceId(null)}

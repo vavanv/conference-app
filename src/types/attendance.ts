@@ -1,9 +1,12 @@
 export interface Attendance {
   id: string;
-  eventId: string;
-  attendeeId: string;
-  checkInTime: string;
-  status: 'present' | 'absent' | 'late';
+  employeeId: string;
+  employeeName: string;
+  date: string;
+  status: 'present' | 'absent' | 'late' | 'leave';
+  checkInTime?: string;
+  checkOutTime?: string;
+  notes?: string;
 }
 
 export interface AttendanceFormData extends Omit<Attendance, 'id'> {}

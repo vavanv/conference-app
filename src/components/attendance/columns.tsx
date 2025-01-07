@@ -8,28 +8,22 @@ export const getAttendanceColumns = (
   onDelete: (id: string) => void
 ): GridColDef[] => [
   { 
-    field: 'eventId', 
-    headerName: 'Event ID', 
+    field: 'employeeName', 
+    headerName: 'Employee', 
     flex: 1,
-    minWidth: 120
+    minWidth: 200
   },
   { 
-    field: 'attendeeId', 
-    headerName: 'Attendee ID', 
+    field: 'date', 
+    headerName: 'Date', 
     flex: 1,
-    minWidth: 120
-  },
-  { 
-    field: 'checkInTime', 
-    headerName: 'Check-in Time', 
-    flex: 1,
-    minWidth: 180,
-    valueFormatter: (params) => new Date(params.value).toLocaleString()
+    minWidth: 150,
+    valueFormatter: (params) => new Date(params.value).toLocaleDateString()
   },
   { 
     field: 'status', 
     headerName: 'Status', 
-    flex: 0.7,
+    flex: 0.8,
     minWidth: 100,
     renderCell: (params) => (
       <Box
@@ -38,15 +32,29 @@ export const getAttendanceColumns = (
           py: 0.5,
           borderRadius: 1,
           bgcolor: params.value === 'present' ? 'success.light' : 
-                   params.value === 'late' ? 'warning.light' : 'error.light',
+                   params.value === 'absent' ? 'error.light' :
+                   params.value === 'late' ? 'warning.light' : 'info.light',
           color: params.value === 'present' ? 'success.dark' : 
-                 params.value === 'late' ? 'warning.dark' : 'error.dark',
+                 params.value === 'absent' ? 'error.dark' :
+                 params.value === 'late' ? 'warning.dark' : 'info.dark',
           textTransform: 'capitalize'
         }}
       >
         {params.value}
       </Box>
     )
+  },
+  { 
+    field: 'checkInTime', 
+    headerName: 'Check-in', 
+    flex: 0.8,
+    minWidth: 100
+  },
+  { 
+    field: 'checkOutTime', 
+    headerName: 'Check-out', 
+    flex: 0.8,
+    minWidth: 100
   },
   {
     field: 'actions',

@@ -25,13 +25,13 @@ const attendanceSlice = createSlice({
       });
     },
     updateAttendance: (state, action: PayloadAction<{ id: string; data: AttendanceFormData }>) => {
-      const index = state.items.findIndex(a => a.id === action.payload.id);
+      const index = state.items.findIndex(attendance => attendance.id === action.payload.id);
       if (index !== -1) {
         state.items[index] = { ...state.items[index], ...action.payload.data };
       }
     },
     deleteAttendance: (state, action: PayloadAction<string>) => {
-      state.items = state.items.filter(a => a.id !== action.payload);
+      state.items = state.items.filter(attendance => attendance.id !== action.payload);
     },
   },
 });

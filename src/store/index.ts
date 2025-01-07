@@ -5,6 +5,7 @@ import authReducer from './slices/authSlice';
 import accountReducer from './slices/accountSlice';
 import companiesReducer from './slices/companiesSlice';
 import eventsReducer from './slices/eventsSlice';
+import attendanceReducer from './slices/attendanceSlice';
 
 export const store = configureStore({
   reducer: {
@@ -13,7 +14,8 @@ export const store = configureStore({
     auth: authReducer,
     account: accountReducer,
     companies: companiesReducer,
-    events: eventsReducer
+    events: eventsReducer,
+    attendance: attendanceReducer
   },
 });
 

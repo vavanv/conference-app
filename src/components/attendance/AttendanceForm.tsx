@@ -25,7 +25,7 @@ interface AttendanceFormProps {
   title: string;
 }
 
-export default function AttendanceForm({ 
+export function AttendanceForm({ 
   open, 
   onClose, 
   onSubmit, 
@@ -87,29 +87,23 @@ export default function AttendanceForm({
               <Stack spacing={3}>
                 <TextField
                   size="small"
-                  label="Event ID"
-                  error={!!errors.eventId}
-                  helperText={errors.eventId?.message}
-                  {...register('eventId')}
+                  label="Employee Name"
+                  error={!!errors.employeeName}
+                  helperText={errors.employeeName?.message}
+                  {...register('employeeName')}
                   fullWidth
                 />
                 <TextField
                   size="small"
-                  label="Attendee ID"
-                  error={!!errors.attendeeId}
-                  helperText={errors.attendeeId?.message}
-                  {...register('attendeeId')}
+                  label="Date"
+                  type="date"
+                  error={!!errors.date}
+                  helperText={errors.date?.message}
+                  {...register('date')}
                   fullWidth
-                />
-                <TextField
-                  size="small"
-                  label="Check-in Time"
-                  type="datetime-local"
-                  InputLabelProps={{ shrink: true }}
-                  error={!!errors.checkInTime}
-                  helperText={errors.checkInTime?.message}
-                  {...register('checkInTime')}
-                  fullWidth
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
                 <TextField
                   size="small"
@@ -123,7 +117,42 @@ export default function AttendanceForm({
                   <MenuItem value="present">Present</MenuItem>
                   <MenuItem value="absent">Absent</MenuItem>
                   <MenuItem value="late">Late</MenuItem>
+                  <MenuItem value="leave">Leave</MenuItem>
                 </TextField>
+                <TextField
+                  size="small"
+                  label="Check-in Time"
+                  type="time"
+                  error={!!errors.checkInTime}
+                  helperText={errors.checkInTime?.message}
+                  {...register('checkInTime')}
+                  fullWidth
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+                <TextField
+                  size="small"
+                  label="Check-out Time"
+                  type="time"
+                  error={!!errors.checkOutTime}
+                  helperText={errors.checkOutTime?.message}
+                  {...register('checkOutTime')}
+                  fullWidth
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+                <TextField
+                  size="small"
+                  label="Notes"
+                  error={!!errors.notes}
+                  helperText={errors.notes?.message}
+                  {...register('notes')}
+                  fullWidth
+                  multiline
+                  rows={3}
+                />
 
                 <Button 
                   variant="contained" 

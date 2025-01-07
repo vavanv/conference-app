@@ -1,12 +1,28 @@
 import * as yup from 'yup';
 
 export const attendanceSchema = yup.object({
-  eventId: yup.string().required('Event ID is required'),
-  attendeeId: yup.string().required('Attendee ID is required'),
-  checkInTime: yup.string().required('Check-in time is required'),
+  employeeId: yup.string()
+    .required('Employee ID is required'),
+  employeeName: yup.string()
+    .required('Employee name is required'),
+  date: yup.string()
+    .required('Date is required'),
   status: yup.string()
-    .oneOf(['present', 'absent', 'late'], 'Invalid status')
-    .required('Status is required')
+    .oneOf(['present', 'absent', 'late', 'leave'], 'Invalid status')
+    .required('Status is required'),
+  checkInTime: yup.string()
+    .when('status', {
+      is: (status: string) => ['present', 'late'].includes(status),
+      then: (schema) => schema.required('Check-in time is required'),
+      otherwise: (schema) => schema.optional()
+    }),
+  checkOutTime: yup.string()
+    .when('status', {
+      is: (status: string) => ['present', 'late'].includes(status),
+      then: (schema) => schema.required('Check-out time is required'),
+      otherwise: (schema) => schema.optional()
+    }),
+  notes: yup.string()
+    .optional()
+    .max(500, 'Notes must be less than 500 characters')
 });
-
-export type AttendanceFormData = yup.InferType<typeof attendanceSchema>;
