@@ -27,7 +27,7 @@ export default function DrawerContent({ isDrawerOpen, toggleDrawer }: DrawerCont
     { text: 'Home', icon: <Home size={18} />, path: '/' },
     { text: 'Employees', icon: <UserCircle size={18} />, path: '/employees' },
     { text: 'Contacts', icon: <Users size={18} />, path: '/contacts' },
-    { text: 'Companies', icon: <Building size={18} />, path: '/companies' },
+    { text: 'Organizations', icon: <Building size={18} />, path: '/organizations' },
     { text: 'Events', icon: <Calendar size={18} />, path: '/events' },
     { text: 'Attendance', icon: <Clock size={18} />, path: '/attendance' },
     { text: 'Presenters', icon: <Mic size={18} />, path: '/presenters' },

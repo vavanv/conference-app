@@ -8,7 +8,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Employees from './pages/Employees';
 import Contacts from './pages/Contacts';
-import Companies from './pages/Companies';
+import Organizations from './pages/Organizations';
 import Events from './pages/Events';
 import Attendance from './pages/Attendance';
 import Account from './pages/Account';
@@ -27,7 +27,7 @@ const ThemeWrapper = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/employees" element={<Employees />} />
             <Route path="/contacts" element={<Contacts />} />
-            <Route path="/companies" element={<Companies />} />
+            <Route path="/organizations" element={<Organizations />} />
             <Route path="/events" element={<Events />} />
             <Route path="/attendance" element={<Attendance />} />
             <Route path="/account" element={<Account />} />
