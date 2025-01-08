@@ -3,7 +3,6 @@ import employeesReducer from './slices/employeesSlice';
 import contactsReducer from './slices/contactsSlice';
 import authReducer from './slices/authSlice';
 import accountReducer from './slices/accountSlice';
-import organizationsReducer from './slices/organizationsSlice';
 import eventsReducer from './slices/eventsSlice';
 import attendanceReducer from './slices/attendanceSlice';
 import presentersReducer from './slices/presentersSlice';
@@ -14,7 +13,6 @@ export const store = configureStore({
     contacts: contactsReducer,
     auth: authReducer,
     account: accountReducer,
-    organizations: organizationsReducer,
     events: eventsReducer,
     attendance: attendanceReducer,
     presenters: presentersReducer
