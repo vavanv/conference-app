@@ -50,8 +50,8 @@ const darkTheme = createTheme({
       main: '#ce93d8',
     },
     background: {
-      default: '#121212',
-      paper: '#1f2937', // Menu background color
+      default: '#1f2937',
+      paper: '#1f2937',
     },
     text: {
       primary: '#ffffff',
@@ -97,6 +97,28 @@ const darkTheme = createTheme({
         paper: {
           backgroundColor: '#1f2937',
           borderRight: 'none',
+        },
+      },
+    },
+    MuiDataGrid: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#1f2937',
+          border: 'none',
+          '& .MuiDataGrid-columnHeaders': {
+            backgroundColor: '#1f2937',
+            borderBottom: '1px solid #374151',
+          },
+          '& .MuiDataGrid-cell': {
+            borderBottom: '1px solid #374151',
+          },
+          '& .MuiDataGrid-footerContainer': {
+            backgroundColor: '#1f2937',
+            borderTop: '1px solid #374151',
+          },
+          '& .MuiDataGrid-toolbarContainer': {
+            backgroundColor: '#1f2937',
+          },
         },
       },
     },
