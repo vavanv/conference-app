@@ -15,10 +15,28 @@ const lightTheme = createTheme({
     },
   },
   typography: {
-    // Your existing typography settings
+    fontFamily: 'Roboto, sans-serif',
+    h1: {
+      fontSize: '2.5rem',
+      fontWeight: 500,
+    },
+    h2: {
+      fontSize: '2rem',
+      fontWeight: 500,
+    },
+    h3: {
+      fontSize: '1.75rem',
+      fontWeight: 500,
+    },
   },
   components: {
-    // Your existing component overrides
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+        },
+      },
+    },
   }
 });
 
@@ -33,14 +51,84 @@ const darkTheme = createTheme({
     },
     background: {
       default: '#121212',
-      paper: '#1e1e1e',
+      paper: '#1f2937', // Menu background color
+    },
+    text: {
+      primary: '#ffffff',
+      secondary: 'rgba(255, 255, 255, 0.7)',
     },
   },
   typography: {
-    // Your existing typography settings
+    fontFamily: 'Roboto, sans-serif',
+    h1: {
+      fontSize: '2.5rem',
+      fontWeight: 500,
+      color: '#ffffff',
+    },
+    h2: {
+      fontSize: '2rem',
+      fontWeight: 500,
+      color: '#ffffff',
+    },
+    h3: {
+      fontSize: '1.75rem',
+      fontWeight: 500,
+      color: '#ffffff',
+    },
   },
   components: {
-    // Your existing component overrides
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          color: '#ffffff',
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#1f2937',
+        },
+      },
+    },
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: '#1f2937',
+          borderRight: 'none',
+        },
+      },
+    },
+    MuiListItemButton: {
+      styleOverrides: {
+        root: {
+          '&.Mui-selected': {
+            backgroundColor: '#374151',
+            '&:hover': {
+              backgroundColor: '#374151',
+            },
+          },
+          '&:hover': {
+            backgroundColor: '#374151',
+          },
+        },
+      },
+    },
+    MuiListItemIcon: {
+      styleOverrides: {
+        root: {
+          color: 'inherit',
+        },
+      },
+    },
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          borderColor: '#374151',
+        },
+      },
+    },
   }
 });
 

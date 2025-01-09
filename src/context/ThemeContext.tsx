@@ -7,12 +7,12 @@ type ThemeContextType = {
 };
 
 const ThemeContext = createContext<ThemeContextType>({
-  themeMode: 'light',
+  themeMode: 'dark', // Set dark as default
   toggleTheme: () => {},
 });
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [themeMode, setThemeMode] = useState<ThemeMode>('light');
+  const [themeMode, setThemeMode] = useState<ThemeMode>('dark'); // Set dark as default
 
   const toggleTheme = () => {
     setThemeMode(prevMode => (prevMode === 'light' ? 'dark' : 'light'));
