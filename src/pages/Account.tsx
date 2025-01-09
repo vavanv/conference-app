@@ -121,8 +121,8 @@ export default function Account() {
                 size="small"
               >
                 <MenuItem value="admin">Admin</MenuItem>
-                <MenuItem value="user">User</MenuItem>
-                <MenuItem value="contact">Contact</MenuItem>
+                <MenuItem value="presenter">Presenter</MenuItem>
+                <MenuItem value="attendee">Attendee</MenuItem>
               </TextField>
             )}
           />

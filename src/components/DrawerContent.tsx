@@ -43,18 +43,13 @@ export default function DrawerContent({
     { text: "Events", icon: <Calendar size={18} />, path: "/events" },
     { text: "Attendance", icon: <Clock size={18} />, path: "/attendance" },
     { text: "Presenters", icon: <Mic size={18} />, path: "/presenters" },
+    { text: "Organizations", icon: <Building2 size={18} />, path: "/organizations" },
     { text: "Account", icon: <Settings size={18} />, path: "/account" },
     { text: "Login", icon: <LogIn size={18} />, path: "/login" },
   ];
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-      }}
-    >
+    <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
       <Toolbar
         sx={{
           display: "flex",
@@ -72,13 +67,7 @@ export default function DrawerContent({
           )}
         </IconButton>
       </Toolbar>
-      <List
-        sx={{
-          flex: "1 1 auto",
-          overflowY: "auto",
-          py: 0.5,
-        }}
-      >
+      <List sx={{ flex: "1 1 auto", overflowY: "auto", py: 0.5 }}>
         {menuItems.map((item) => (
           <ListItem key={item.text} disablePadding sx={{ display: "block" }}>
             <ListItemButton

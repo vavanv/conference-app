@@ -10,6 +10,7 @@ import Events from "./pages/Events";
 import Attendance from "./pages/Attendance";
 import Account from "./pages/Account";
 import Presenters from "./pages/Presenters";
+import Organizations from "./pages/Organizations";
 
 const ThemeWrapper = () => {
   const { themeMode } = useThemeContext();
@@ -26,6 +27,7 @@ const ThemeWrapper = () => {
             <Route path="/attendance" element={<Attendance />} />
             <Route path="/account" element={<Account />} />
             <Route path="/presenters" element={<Presenters />} />
+            <Route path="/organizations" element={<Organizations />} />
           </Routes>
         </Layout>
       </BrowserRouter>
@@ -33,10 +35,12 @@ const ThemeWrapper = () => {
   );
 };
 
-export default function App() {
+function App() {
   return (
     <ThemeProvider>
       <ThemeWrapper />
     </ThemeProvider>
   );
 }
+
+export default App;

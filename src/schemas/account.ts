@@ -15,7 +15,7 @@ export const accountSchema = yup.object({
     ),
   accountType: yup.string()
     .required('Account type is required')
-    .oneOf(['admin', 'user', 'contact'], 'Invalid account type')
+    .oneOf(['admin', 'presenter', 'attendee'], 'Invalid account type')
 });
 
 export type AccountFormData = yup.InferType<typeof accountSchema>;
