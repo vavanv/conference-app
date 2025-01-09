@@ -47,14 +47,6 @@ export function LoginForm() {
 
   return (
     <>
-      <Typography 
-        variant="h6" 
-        align="center"
-        sx={{ mb: 2 }}
-      >
-        Sign In
-      </Typography>
-
       <Collapse in={!!error}>
         <Alert severity="error" sx={{ mb: 2 }}>
           {error}
@@ -107,7 +99,7 @@ export function LoginForm() {
           disabled={loading}
           sx={{ py: 1 }}
         >
-          {loading ? 'Signing in...' : 'Sign In'}
+          {loading ? 'Logging in...' : 'Login'}
         </Button>
       </Box>
     </>
