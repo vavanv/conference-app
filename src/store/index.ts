@@ -1,21 +1,17 @@
-import { configureStore } from '@reduxjs/toolkit';
-import employeesReducer from './slices/employeesSlice';
-import contactsReducer from './slices/contactsSlice';
-import authReducer from './slices/authSlice';
-import accountReducer from './slices/accountSlice';
-import eventsReducer from './slices/eventsSlice';
-import attendanceReducer from './slices/attendanceSlice';
-import presentersReducer from './slices/presentersSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "./slices/authSlice";
+import accountReducer from "./slices/accountSlice";
+import eventsReducer from "./slices/eventsSlice";
+import attendanceReducer from "./slices/attendanceSlice";
+import presentersReducer from "./slices/presentersSlice";
 
 export const store = configureStore({
   reducer: {
-    employees: employeesReducer,
-    contacts: contactsReducer,
     auth: authReducer,
     account: accountReducer,
     events: eventsReducer,
     attendance: attendanceReducer,
-    presenters: presentersReducer
+    presenters: presentersReducer,
   },
 });
 
