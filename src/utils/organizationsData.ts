@@ -1,4 +1,5 @@
 import { Organization } from '../types/organization';
+import { generateInitialEvents } from './eventsData';
 
 const organizationTypes = ['Corporate', 'Non-Profit', 'Educational', 'Government', 'Startup'];
 const cities = ['New York', 'San Francisco', 'Chicago', 'Boston', 'Seattle'];
@@ -19,15 +20,18 @@ export function generateInitialOrganizations(): Organization[] {
     const type = getRandomElement(organizationTypes);
     const city = getRandomElement(cities);
     
-    organizations.push({
+    const organization: Organization = {
       id: crypto.randomUUID(),
       name,
       type,
       contactEmail: `contact@${name.toLowerCase().replace(/ /g, '')}.com`,
       phone: generatePhone(),
       address: `${Math.floor(Math.random() * 1000) + 1} ${city} St, ${city}`,
-      status: Math.random() > 0.2 ? 'active' : 'inactive'
-    });
+      status: Math.random() > 0.2 ? 'active' : 'inactive',
+      events: generateInitialEvents(5) // Generate 5 events per organization
+    };
+    
+    organizations.push(organization);
   }
   
   return organizations;

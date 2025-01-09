@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Event, EventFormData } from '../../types/event';
-import { generateInitialEvents } from '../../utils/eventsData';
 
 interface EventsState {
   items: Event[];
@@ -9,7 +8,7 @@ interface EventsState {
 }
 
 const initialState: EventsState = {
-  items: generateInitialEvents(),
+  items: [],
   loading: false,
   error: null,
 };
@@ -33,8 +32,14 @@ const eventsSlice = createSlice({
     deleteEvent: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter(event => event.id !== action.payload);
     },
+    setOrganizationEvents: (state, action: PayloadAction<{ organizationId: string; events: Event[] }>) => {
+      // Remove existing events for this organization
+      state.items = state.items.filter(event => event.organizationId !== action.payload.organizationId);
+      // Add new events
+      state.items.push(...action.payload.events);
+    }
   },
 });
 
-export const { addEvent, updateEvent, deleteEvent } = eventsSlice.actions;
+export const { addEvent, updateEvent, deleteEvent, setOrganizationEvents } = eventsSlice.actions;
 export default eventsSlice.reducer;
