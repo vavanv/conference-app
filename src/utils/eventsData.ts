@@ -82,3 +82,51 @@ export function generateInitialEvents(count: number): Event[] {
   
   return events;
 }
+
+// Mockup data for testing
+export const mockEvents: Event[] = [
+  {
+    id: 'event-001',
+    organizationId: 'org-001',
+    name: 'Tech Innovators Summit',
+    description: 'Annual gathering of technology leaders and innovators',
+    startDate: '2024-03-15T09:00:00Z',
+    endDate: '2024-03-17T18:00:00Z',
+    locations: ['Main Hall', 'Conference Room A'],
+    organizer: 'Tech Innovators Inc.',
+    status: 'scheduled'
+  },
+  {
+    id: 'event-002',
+    organizationId: 'org-002',
+    name: 'Digital Marketing Conference',
+    description: 'Learn the latest trends in digital marketing',
+    startDate: '2024-04-10T10:00:00Z',
+    endDate: '2024-04-11T17:00:00Z',
+    locations: ['Auditorium'],
+    organizer: 'Global Marketing Association',
+    status: 'scheduled'
+  },
+  {
+    id: 'event-003',
+    organizationId: 'org-003',
+    name: 'AI & Machine Learning Workshop',
+    description: 'Hands-on workshop on AI and ML technologies',
+    startDate: '2024-05-20T13:00:00Z',
+    endDate: '2024-05-21T16:00:00Z',
+    locations: ['Workshop Room 1', 'Workshop Room 2'],
+    organizer: 'AI Pioneers',
+    status: 'scheduled'
+  },
+  {
+    id: 'event-004',
+    organizationId: 'org-004',
+    name: 'Cybersecurity Symposium',
+    description: 'Exploring the latest in cybersecurity threats and solutions',
+    startDate: '2024-06-05T08:30:00Z',
+    endDate: '2024-06-07T17:00:00Z',
+    locations: ['Keynote Hall', 'Panel Discussion Room'],
+    organizer: 'Cyber Shield',
+    status: 'scheduled'
+  }
+];

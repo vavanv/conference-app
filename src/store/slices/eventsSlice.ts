@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Event, EventFormData } from '../../types/event';
+import { mockEvents } from '../../utils/eventsData';
 
 interface EventsState {
   items: Event[];
@@ -8,7 +9,7 @@ interface EventsState {
 }
 
 const initialState: EventsState = {
-  items: [],
+  items: mockEvents, // Use mock data for initial state
   loading: false,
   error: null,
 };
