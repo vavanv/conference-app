@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { Box } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { Attendance, AttendanceFormData } from '../../types/attendance';
-import { AttendanceForm } from './AttendanceForm';
+import AttendanceForm from './AttendanceForm';
 import { ConfirmDialog } from '../common/ConfirmDialog';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import { addAttendance, updateAttendance, deleteAttendance } from '../../store/slices/attendanceSlice';
 import { getAttendanceColumns } from './columns';
 import { CustomGridToolbar } from '../common/CustomGridToolbar';
 
-export function AttendanceGrid() {
+export default function AttendanceGrid() {
   const dispatch = useAppDispatch();
   const attendance = useAppSelector(state => state.attendance.items);
   const [isAddOpen, setIsAddOpen] = useState(false);

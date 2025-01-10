@@ -39,7 +39,15 @@ export default function AttendanceForm({
     formState: { errors, isSubmitting }
   } = useForm<AttendanceFormData>({
     resolver: yupResolver(attendanceSchema),
-    defaultValues: initialData
+    defaultValues: initialData || {
+      employeeName: '',
+      email: '',
+      date: '',
+      status: 'present',
+      checkInTime: '',
+      checkOutTime: '',
+      notes: ''
+    }
   });
 
   const handleFormSubmit = (data: AttendanceFormData) => {
