@@ -9,7 +9,7 @@ import {
   IconButton,
   useTheme,
   Typography,
-  Box
+  Box,
 } from "@mui/material";
 import {
   Home,
@@ -40,7 +40,11 @@ export default function DrawerContent({
 
   const menuItems = [
     { text: "Home", icon: <Home size={18} />, path: "/" },
-    { text: "Organizations", icon: <Building2 size={18} />, path: "/organizations" },
+    {
+      text: "Organizations",
+      icon: <Building2 size={18} />,
+      path: "/organizations",
+    },
     { text: "Events", icon: <Calendar size={18} />, path: "/events" },
     { text: "Attendance", icon: <Clock size={18} />, path: "/attendance" },
     { text: "Presenters", icon: <Mic size={18} />, path: "/presenters" },
@@ -57,11 +61,11 @@ export default function DrawerContent({
           justifyContent: "space-between",
           minHeight: 48,
           px: [1],
-          borderBottom: '1px solid',
-          borderColor: 'divider',
+          borderBottom: "1px solid",
+          borderColor: "divider",
         }}
       >
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
           <IconButton onClick={toggleDrawer} size="small">
             {isDrawerOpen ? (
               <ChevronLeft size={18} />
@@ -69,23 +73,23 @@ export default function DrawerContent({
               <ChevronRight size={18} />
             )}
           </IconButton>
-          <Box>
-            <Typography 
-              variant="h6" 
-              sx={{ 
+          <Box sx={{ display: isDrawerOpen ? "" : "none" }}>
+            <Typography
+              variant="h6"
+              sx={{
                 fontWeight: 700,
                 color: theme.palette.primary.main,
-                lineHeight: 1.2
+                lineHeight: 1.2,
               }}
             >
-              ConffM
+              ConfMax
             </Typography>
-            <Typography 
-              variant="caption" 
-              sx={{ 
-                color: 'text.secondary',
-                fontSize: '0.7rem',
-                lineHeight: 1.2
+            <Typography
+              variant="caption"
+              sx={{
+                color: "text.secondary",
+                fontSize: "0.7rem",
+                lineHeight: 1.2,
               }}
             >
               Conference Management
