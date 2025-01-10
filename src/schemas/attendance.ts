@@ -5,6 +5,9 @@ export const attendanceSchema = yup.object({
     .required('Employee ID is required'),
   employeeName: yup.string()
     .required('Employee name is required'),
+  email: yup.string()
+    .required('Email is required')
+    .email('Invalid email format'),
   date: yup.string()
     .required('Date is required'),
   status: yup.string()

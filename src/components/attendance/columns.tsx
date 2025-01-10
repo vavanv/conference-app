@@ -14,6 +14,12 @@ export const getAttendanceColumns = (
     minWidth: 200
   },
   { 
+    field: 'email',
+    headerName: 'Email',
+    flex: 1.5,
+    minWidth: 200
+  },
+  { 
     field: 'date', 
     headerName: 'Date', 
     flex: 1,

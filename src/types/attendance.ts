@@ -2,6 +2,7 @@ export interface Attendance {
   id: string;
   employeeId: string;
   employeeName: string;
+  email: string;
   date: string;
   status: 'present' | 'absent' | 'late' | 'leave';
   checkInTime?: string;
