@@ -1,20 +1,26 @@
-import React, { useState } from 'react';
-import { Box } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
-import { Presenter, PresenterFormData } from '../../types/presenter';
-import { PresenterForm } from './PresenterForm';
-import { ConfirmDialog } from '../common/ConfirmDialog';
-import { useAppSelector, useAppDispatch } from '../../hooks/redux';
-import { addPresenter, updatePresenter, deletePresenter } from '../../store/slices/presentersSlice';
-import { getPresenterColumns } from './columns';
-import { CustomGridToolbar } from '../common/CustomGridToolbar';
+import { useState } from "react";
+import { Box } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
+import { Presenter, PresenterFormData } from "../../types/presenter";
+import { PresenterForm } from "./PresenterForm";
+import { ConfirmDialog } from "../common/ConfirmDialog";
+import { useAppSelector, useAppDispatch } from "../../hooks/redux";
+import {
+  addPresenter,
+  updatePresenter,
+  deletePresenter,
+} from "../../store/slices/presentersSlice";
+import { getPresenterColumns } from "./columns";
+import { CustomGridToolbar } from "../common/CustomGridToolbar";
 
 export function PresentersGrid() {
   const dispatch = useAppDispatch();
-  const presenters = useAppSelector(state => state.presenters.items);
+  const presenters = useAppSelector((state) => state.presenters.items);
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [editPresenter, setEditPresenter] = useState<Presenter | null>(null);
-  const [deletePresenterId, setDeletePresenterId] = useState<string | null>(null);
+  const [deletePresenterId, setDeletePresenterId] = useState<string | null>(
+    null
+  );
   const [paginationModel, setPaginationModel] = useState({
     pageSize: 25,
     page: 0,
@@ -48,22 +54,29 @@ export function PresentersGrid() {
   };
 
   const columns = getPresenterColumns(handleEdit, handleDeleteClick);
-  const presenterToDelete = presenters.find(p => p.id === deletePresenterId);
+  const presenterToDelete = presenters.find((p) => p.id === deletePresenterId);
 
   return (
-    <Box sx={{ 
-      display: 'flex', 
-      flexDirection: 'column',
-      height: 'calc(100vh - 140px)'
-    }}>      
-      <Box sx={{ flex: 1, width: '100%', overflow: 'hidden' }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "calc(100vh - 170px)",
+        backgroundColor: "background.paper",
+      }}
+    >
+      <Box sx={{ flex: 1, width: "100%", overflow: "hidden" }}>
         <DataGrid
           rows={presenters}
           columns={columns}
           density="compact"
           components={{
             Toolbar: (props) => (
-              <CustomGridToolbar {...props} onAdd={() => setIsAddOpen(true)} addButtonText="Add Presenter" />
+              <CustomGridToolbar
+                {...props}
+                onAdd={() => setIsAddOpen(true)}
+                addButtonText="Add Presenter"
+              />
             ),
           }}
           paginationModel={paginationModel}
@@ -71,17 +84,17 @@ export function PresentersGrid() {
           pageSizeOptions={[10, 25, 50]}
           disableRowSelectionOnClick
           sx={{
-            height: '100%',
-            border: 'none',
-            '& .MuiDataGrid-cell': {
-              borderColor: 'divider',
+            height: "100%",
+            border: "none",
+            "& .MuiDataGrid-cell": {
+              borderColor: "divider",
             },
-            '& .MuiDataGrid-columnHeaders': {
-              bgcolor: 'background.default',
-              borderColor: 'divider',
+            "& .MuiDataGrid-columnHeaders": {
+              bgcolor: "background.default",
+              borderColor: "divider",
             },
-            '& .MuiDataGrid-footerContainer': {
-              borderColor: 'divider',
+            "& .MuiDataGrid-footerContainer": {
+              borderColor: "divider",
             },
           }}
         />
@@ -107,7 +120,11 @@ export function PresentersGrid() {
       <ConfirmDialog
         open={!!deletePresenterId}
         title="Delete Presenter"
-        message={presenterToDelete ? `Are you sure you want to delete ${presenterToDelete.firstName} ${presenterToDelete.lastName}?` : ''}
+        message={
+          presenterToDelete
+            ? `Are you sure you want to delete ${presenterToDelete.firstName} ${presenterToDelete.lastName}?`
+            : ""
+        }
         confirmLabel="Delete"
         onConfirm={handleDeleteConfirm}
         onCancel={() => setDeletePresenterId(null)}

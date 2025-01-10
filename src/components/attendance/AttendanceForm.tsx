@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Drawer,
   Box,
@@ -9,13 +8,13 @@ import {
   MenuItem,
   IconButton,
   Fade,
-  Slide
-} from '@mui/material';
-import { X } from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { attendanceSchema } from '../../schemas/attendance';
-import { AttendanceFormData } from '../../types/attendance';
+  Slide,
+} from "@mui/material";
+import { X } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { attendanceSchema } from "../../schemas/attendance";
+import { AttendanceFormData } from "../../types/attendance";
 
 interface AttendanceFormProps {
   open: boolean;
@@ -25,29 +24,29 @@ interface AttendanceFormProps {
   title: string;
 }
 
-export default function AttendanceForm({ 
-  open, 
-  onClose, 
-  onSubmit, 
-  initialData, 
-  title 
+export default function AttendanceForm({
+  open,
+  onClose,
+  onSubmit,
+  initialData,
+  title,
 }: AttendanceFormProps) {
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting }
+    formState: { errors, isSubmitting },
   } = useForm<AttendanceFormData>({
     resolver: yupResolver(attendanceSchema),
     defaultValues: initialData || {
-      employeeName: '',
-      email: '',
-      date: '',
-      status: 'present',
-      checkInTime: '',
-      checkOutTime: '',
-      notes: ''
-    }
+      employeeName: "",
+      email: "",
+      date: "",
+      status: "present",
+      checkInTime: "",
+      checkOutTime: "",
+      notes: "",
+    },
   });
 
   const handleFormSubmit = (data: AttendanceFormData) => {
@@ -62,28 +61,31 @@ export default function AttendanceForm({
       open={open}
       onClose={onClose}
       PaperProps={{
-        sx: { 
-          width: { xs: '100%', sm: 400 },
-          transition: (theme) => theme.transitions.create(['transform'], {
-            duration: theme.transitions.duration.standard,
-            easing: theme.transitions.easing.easeInOut,
-          })
-        }
+        sx: {
+          width: { xs: "100%", sm: 400 },
+          transition: (theme) =>
+            theme.transitions.create(["transform"], {
+              duration: theme.transitions.duration.standard,
+              easing: theme.transitions.easing.easeInOut,
+            }),
+        },
       }}
       transitionDuration={400}
       SlideProps={{
         appear: true,
-        direction: "left"
+        direction: "left",
       }}
     >
       <Fade in={open} timeout={600}>
         <Box sx={{ p: 3 }}>
-          <Box sx={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center',
-            mb: 3 
-          }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              mb: 3,
+            }}
+          >
             <Typography variant="h6">{title}</Typography>
             <IconButton onClick={onClose} size="small">
               <X />
@@ -98,7 +100,7 @@ export default function AttendanceForm({
                   label="Employee Name"
                   error={!!errors.employeeName}
                   helperText={errors.employeeName?.message}
-                  {...register('employeeName')}
+                  {...register("employeeName")}
                   fullWidth
                 />
                 <TextField
@@ -107,7 +109,7 @@ export default function AttendanceForm({
                   type="email"
                   error={!!errors.email}
                   helperText={errors.email?.message}
-                  {...register('email')}
+                  {...register("email")}
                   fullWidth
                 />
                 <TextField
@@ -116,7 +118,7 @@ export default function AttendanceForm({
                   type="date"
                   error={!!errors.date}
                   helperText={errors.date?.message}
-                  {...register('date')}
+                  {...register("date")}
                   fullWidth
                   InputLabelProps={{
                     shrink: true,
@@ -128,7 +130,7 @@ export default function AttendanceForm({
                   label="Status"
                   error={!!errors.status}
                   helperText={errors.status?.message}
-                  {...register('status')}
+                  {...register("status")}
                   fullWidth
                 >
                   <MenuItem value="present">Present</MenuItem>
@@ -142,7 +144,7 @@ export default function AttendanceForm({
                   type="time"
                   error={!!errors.checkInTime}
                   helperText={errors.checkInTime?.message}
-                  {...register('checkInTime')}
+                  {...register("checkInTime")}
                   fullWidth
                   InputLabelProps={{
                     shrink: true,
@@ -154,7 +156,7 @@ export default function AttendanceForm({
                   type="time"
                   error={!!errors.checkOutTime}
                   helperText={errors.checkOutTime?.message}
-                  {...register('checkOutTime')}
+                  {...register("checkOutTime")}
                   fullWidth
                   InputLabelProps={{
                     shrink: true,
@@ -165,19 +167,19 @@ export default function AttendanceForm({
                   label="Notes"
                   error={!!errors.notes}
                   helperText={errors.notes?.message}
-                  {...register('notes')}
+                  {...register("notes")}
                   fullWidth
                   multiline
                   rows={3}
                 />
 
-                <Button 
-                  variant="contained" 
+                <Button
+                  variant="contained"
                   type="submit"
                   disabled={isSubmitting}
                   fullWidth
                 >
-                  {isSubmitting ? 'Saving...' : 'Save'}
+                  {isSubmitting ? "Saving..." : "Save"}
                 </Button>
               </Stack>
             </form>

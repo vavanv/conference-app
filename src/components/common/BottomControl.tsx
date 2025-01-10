@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
-import { Paper, Box, Typography, IconButton, Tooltip, useTheme, useMediaQuery } from '@mui/material';
-import { Settings, HelpCircle, Bell } from 'lucide-react';
-import { SettingsForm } from '../SettingsForm';
+import { useState } from "react";
+import {
+  Paper,
+  Box,
+  Typography,
+  IconButton,
+  Tooltip,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
+import { Settings, HelpCircle, Bell } from "lucide-react";
+import { SettingsForm } from "../SettingsForm";
 
 interface BottomControlProps {
   drawerWidth: number;
   minDrawerWidth: number;
 }
 
-export default function BottomControl({ drawerWidth, minDrawerWidth }: BottomControlProps) {
+export default function BottomControl({ minDrawerWidth }: BottomControlProps) {
   const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
+  const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));
   const [settingsOpen, setSettingsOpen] = useState(false);
 
   return (
@@ -18,16 +26,16 @@ export default function BottomControl({ drawerWidth, minDrawerWidth }: BottomCon
       <Paper
         elevation={0}
         sx={{
-          position: 'fixed',
+          position: "fixed",
           bottom: 0,
           left: { xs: 0, sm: isDesktop ? minDrawerWidth : 0 },
           right: 0,
           zIndex: 1000,
           borderRadius: 0,
-          bgcolor: 'background.paper',
-          borderTop: '1px solid',
-          borderColor: 'divider',
-          transition: theme.transitions.create(['left'], {
+          bgcolor: "background.paper",
+          borderTop: "1px solid",
+          borderColor: "divider",
+          transition: theme.transitions.create(["left"], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
           }),
@@ -35,38 +43,38 @@ export default function BottomControl({ drawerWidth, minDrawerWidth }: BottomCon
       >
         <Box
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
             px: 2,
             height: 32,
           }}
         >
-          <Typography 
-            variant="caption" 
+          <Typography
+            variant="caption"
             color="text.secondary"
-            sx={{ fontSize: '0.7rem' }}
+            sx={{ fontSize: "0.7rem" }}
           >
             © {new Date().getFullYear()} Your Company
           </Typography>
-          
-          <Box sx={{ display: 'flex', gap: 0.5 }}>
+
+          <Box sx={{ display: "flex", gap: 0.5 }}>
             <Tooltip title="Notifications">
               <IconButton size="small" color="inherit" sx={{ p: 0.5 }}>
                 <Bell size={16} />
               </IconButton>
             </Tooltip>
-            
+
             <Tooltip title="Help">
               <IconButton size="small" color="inherit" sx={{ p: 0.5 }}>
                 <HelpCircle size={16} />
               </IconButton>
             </Tooltip>
-            
+
             <Tooltip title="Settings">
-              <IconButton 
-                size="small" 
-                color="inherit" 
+              <IconButton
+                size="small"
+                color="inherit"
                 sx={{ p: 0.5 }}
                 onClick={() => setSettingsOpen(true)}
               >
@@ -77,9 +85,9 @@ export default function BottomControl({ drawerWidth, minDrawerWidth }: BottomCon
         </Box>
       </Paper>
 
-      <SettingsForm 
-        open={settingsOpen} 
-        onClose={() => setSettingsOpen(false)} 
+      <SettingsForm
+        open={settingsOpen}
+        onClose={() => setSettingsOpen(false)}
       />
     </>
   );

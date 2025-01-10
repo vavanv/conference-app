@@ -1,20 +1,34 @@
-import React, { useEffect } from 'react';
-import { Box, Typography, TextField, Button, Stack, InputAdornment, IconButton, MenuItem } from '@mui/material';
-import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { accountSchema, AccountFormData } from '../schemas/account';
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import { updateAccount } from '../store/slices/accountSlice';
-import { Eye, EyeOff } from 'lucide-react';
+import React, { useEffect } from "react";
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  Stack,
+  InputAdornment,
+  IconButton,
+  MenuItem,
+} from "@mui/material";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { accountSchema, AccountFormData } from "../schemas/account";
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
+import { updateAccount } from "../store/slices/accountSlice";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function Account() {
   const [showPassword, setShowPassword] = React.useState(false);
   const dispatch = useAppDispatch();
-  const account = useAppSelector(state => state.account);
-  
-  const { control, handleSubmit, formState: { errors }, reset } = useForm<AccountFormData>({
+  const account = useAppSelector((state) => state.account);
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<AccountFormData>({
     resolver: yupResolver(accountSchema),
-    defaultValues: account
+    defaultValues: account,
   });
 
   useEffect(() => {
@@ -26,11 +40,18 @@ export default function Account() {
   };
 
   return (
-    <Box sx={{ maxWidth: 600, mx: 'auto', p: 3 }}>
+    <Box
+      sx={{
+        maxWidth: 600,
+        mx: "auto",
+        p: 3,
+        backgroundColor: "background.paper",
+      }}
+    >
       <Typography variant="h5" gutterBottom>
         Account Settings
       </Typography>
-      
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={3}>
           <Controller
@@ -84,7 +105,7 @@ export default function Account() {
             render={({ field }) => (
               <TextField
                 {...field}
-                type={showPassword ? 'text' : 'password'}
+                type={showPassword ? "text" : "password"}
                 label="Password"
                 error={!!errors.password}
                 helperText={errors.password?.message}
@@ -98,10 +119,14 @@ export default function Account() {
                         edge="end"
                         size="small"
                       >
-                        {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                        {showPassword ? (
+                          <EyeOff size={16} />
+                        ) : (
+                          <Eye size={16} />
+                        )}
                       </IconButton>
                     </InputAdornment>
-                  )
+                  ),
                 }}
               />
             )}
@@ -127,12 +152,7 @@ export default function Account() {
             )}
           />
 
-          <Button 
-            type="submit" 
-            variant="contained" 
-            size="large"
-            sx={{ mt: 2 }}
-          >
+          <Button type="submit" variant="contained" size="large" sx={{ mt: 2 }}>
             Save Changes
           </Button>
         </Stack>

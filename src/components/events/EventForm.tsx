@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Drawer,
   Box,
@@ -9,25 +8,25 @@ import {
   MenuItem,
   IconButton,
   Fade,
-  Slide
-} from '@mui/material';
-import { X } from 'lucide-react';
-import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { eventSchema } from '../../schemas/event';
-import { EventFormData } from '../../types/event';
+  Slide,
+} from "@mui/material";
+import { X } from "lucide-react";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { eventSchema } from "../../schemas/event";
+import { EventFormData } from "../../types/event";
 
 const allLocations = [
-  'Main Hall',
-  'Conference Room A',
-  'Conference Room B',
-  'Auditorium',
-  'Exhibition Hall',
-  'Workshop Room 1',
-  'Workshop Room 2',
-  'Networking Lounge',
-  'Panel Discussion Room',
-  'Keynote Hall'
+  "Main Hall",
+  "Conference Room A",
+  "Conference Room B",
+  "Auditorium",
+  "Exhibition Hall",
+  "Workshop Room 1",
+  "Workshop Room 2",
+  "Networking Lounge",
+  "Panel Discussion Room",
+  "Keynote Hall",
 ];
 
 interface EventFormProps {
@@ -38,32 +37,30 @@ interface EventFormProps {
   title: string;
 }
 
-export function EventForm({ 
-  open, 
-  onClose, 
-  onSubmit, 
-  initialData, 
-  title 
+export function EventForm({
+  open,
+  onClose,
+  onSubmit,
+  initialData,
+  title,
 }: EventFormProps) {
   const {
     control,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-    watch,
-    setValue
   } = useForm<EventFormData>({
     resolver: yupResolver(eventSchema),
     defaultValues: initialData || {
-      name: '',
-      description: '',
-      startDate: '',
-      endDate: '',
+      name: "",
+      description: "",
+      startDate: "",
+      endDate: "",
       locations: [],
-      organizer: '',
-      status: 'scheduled',
-      organizationId: ''
-    }
+      organizer: "",
+      status: "scheduled",
+      organizationId: "",
+    },
   });
 
   const handleFormSubmit = (data: EventFormData) => {
@@ -78,28 +75,31 @@ export function EventForm({
       open={open}
       onClose={onClose}
       PaperProps={{
-        sx: { 
-          width: { xs: '100%', sm: 400 },
-          transition: (theme) => theme.transitions.create(['transform'], {
-            duration: theme.transitions.duration.standard,
-            easing: theme.transitions.easing.easeInOut,
-          })
-        }
+        sx: {
+          width: { xs: "100%", sm: 400 },
+          transition: (theme) =>
+            theme.transitions.create(["transform"], {
+              duration: theme.transitions.duration.standard,
+              easing: theme.transitions.easing.easeInOut,
+            }),
+        },
       }}
       transitionDuration={400}
       SlideProps={{
         appear: true,
-        direction: "left"
+        direction: "left",
       }}
     >
       <Fade in={open} timeout={600}>
         <Box sx={{ p: 3 }}>
-          <Box sx={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center',
-            mb: 3 
-          }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              mb: 3,
+            }}
+          >
             <Typography variant="h6">{title}</Typography>
             <IconButton onClick={onClose} size="small">
               <X />
@@ -191,7 +191,7 @@ export function EventForm({
                       SelectProps={{
                         multiple: true,
                         value: field.value || [],
-                        onChange: (e) => field.onChange(e.target.value)
+                        onChange: (e) => field.onChange(e.target.value),
                       }}
                       error={!!errors.locations}
                       helperText={errors.locations?.message}
@@ -242,13 +242,13 @@ export function EventForm({
                   )}
                 />
 
-                <Button 
-                  variant="contained" 
+                <Button
+                  variant="contained"
                   type="submit"
                   disabled={isSubmitting}
                   fullWidth
                 >
-                  {isSubmitting ? 'Saving...' : 'Save'}
+                  {isSubmitting ? "Saving..." : "Save"}
                 </Button>
               </Stack>
             </form>

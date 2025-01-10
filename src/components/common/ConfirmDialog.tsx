@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -7,9 +6,9 @@ import {
   Button,
   Typography,
   IconButton,
-  Box
-} from '@mui/material';
-import { X } from 'lucide-react';
+  Box,
+} from "@mui/material";
+import { X } from "lucide-react";
 
 interface ConfirmDialogProps {
   open: boolean;
@@ -25,21 +24,21 @@ export function ConfirmDialog({
   open,
   title,
   message,
-  confirmLabel = 'Confirm',
-  cancelLabel = 'Cancel',
+  confirmLabel = "Confirm",
+  cancelLabel = "Cancel",
   onConfirm,
-  onCancel
+  onCancel,
 }: ConfirmDialogProps) {
   return (
-    <Dialog 
-      open={open} 
+    <Dialog
+      open={open}
       onClose={onCancel}
       PaperProps={{
-        sx: { 
+        sx: {
           borderRadius: 2,
-          width: '100%',
-          maxWidth: 400
-        }
+          width: "100%",
+          maxWidth: 400,
+        },
       }}
     >
       <DialogTitle sx={{ m: 0, p: 2 }}>
@@ -48,7 +47,7 @@ export function ConfirmDialog({
           <IconButton
             onClick={onCancel}
             size="small"
-            sx={{ color: 'text.secondary' }}
+            sx={{ color: "text.secondary" }}
           >
             <X size={20} />
           </IconButton>

@@ -1,47 +1,50 @@
-import React from 'react';
-import { 
-  Typography, 
-  TextField, 
-  Button, 
+import React from "react";
+import {
+  TextField,
+  Button,
   Box,
   InputAdornment,
   IconButton,
   Alert,
-  Collapse
-} from '@mui/material';
-import { Eye, EyeOff } from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { loginSchema } from '../../schemas/login';
-import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { loginStart, loginSuccess, loginFailure } from '../../store/slices/authSlice';
-import type { LoginFormData } from '../../types/auth';
+  Collapse,
+} from "@mui/material";
+import { Eye, EyeOff } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginSchema } from "../../schemas/login";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+} from "../../store/slices/authSlice";
+import type { LoginFormData } from "../../types/auth";
 
 export function LoginForm() {
   const [showPassword, setShowPassword] = React.useState(false);
   const dispatch = useAppDispatch();
-  const { error, loading } = useAppSelector(state => state.auth);
+  const { error, loading } = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
 
-  const { 
-    register, 
+  const {
+    register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<LoginFormData>({
     resolver: yupResolver(loginSchema),
-    mode: 'onBlur'
+    mode: "onBlur",
   });
 
   const onSubmit = async (data: LoginFormData) => {
     try {
       dispatch(loginStart());
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       dispatch(loginSuccess(data));
-      navigate('/');
+      navigate("/");
     } catch (err) {
-      dispatch(loginFailure('An error occurred during login'));
+      dispatch(loginFailure("An error occurred during login"));
     }
   };
 
@@ -53,26 +56,22 @@ export function LoginForm() {
         </Alert>
       </Collapse>
 
-      <Box 
-        component="form" 
-        onSubmit={handleSubmit(onSubmit)}
-        noValidate
-      >
+      <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
         <TextField
           fullWidth
           size="small"
           label="Email"
           error={!!errors.email}
           helperText={errors.email?.message}
-          {...register('email')}
+          {...register("email")}
           sx={{ mb: 2 }}
         />
-        
+
         <TextField
           fullWidth
           size="small"
           label="Password"
-          type={showPassword ? 'text' : 'password'}
+          type={showPassword ? "text" : "password"}
           error={!!errors.password}
           helperText={errors.password?.message}
           InputProps={{
@@ -88,7 +87,7 @@ export function LoginForm() {
               </InputAdornment>
             ),
           }}
-          {...register('password')}
+          {...register("password")}
           sx={{ mb: 3 }}
         />
 
@@ -99,7 +98,7 @@ export function LoginForm() {
           disabled={loading}
           sx={{ py: 1 }}
         >
-          {loading ? 'Logging in...' : 'Login'}
+          {loading ? "Logging in..." : "Login"}
         </Button>
       </Box>
     </>

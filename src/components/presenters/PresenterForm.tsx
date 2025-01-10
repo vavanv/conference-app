@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Drawer,
   Box,
@@ -9,13 +8,13 @@ import {
   MenuItem,
   IconButton,
   Fade,
-  Slide
-} from '@mui/material';
-import { X } from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { presenterSchema } from '../../schemas/presenter';
-import { PresenterFormData } from '../../types/presenter';
+  Slide,
+} from "@mui/material";
+import { X } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { presenterSchema } from "../../schemas/presenter";
+import { PresenterFormData } from "../../types/presenter";
 
 interface PresenterFormProps {
   open: boolean;
@@ -25,21 +24,21 @@ interface PresenterFormProps {
   title: string;
 }
 
-export function PresenterForm({ 
-  open, 
-  onClose, 
-  onSubmit, 
-  initialData, 
-  title 
+export function PresenterForm({
+  open,
+  onClose,
+  onSubmit,
+  initialData,
+  title,
 }: PresenterFormProps) {
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting }
+    formState: { errors, isSubmitting },
   } = useForm<PresenterFormData>({
     resolver: yupResolver(presenterSchema),
-    defaultValues: initialData
+    defaultValues: initialData,
   });
 
   const handleFormSubmit = (data: PresenterFormData) => {
@@ -54,28 +53,31 @@ export function PresenterForm({
       open={open}
       onClose={onClose}
       PaperProps={{
-        sx: { 
-          width: { xs: '100%', sm: 400 },
-          transition: (theme) => theme.transitions.create(['transform'], {
-            duration: theme.transitions.duration.standard,
-            easing: theme.transitions.easing.easeInOut,
-          })
-        }
+        sx: {
+          width: { xs: "100%", sm: 400 },
+          transition: (theme) =>
+            theme.transitions.create(["transform"], {
+              duration: theme.transitions.duration.standard,
+              easing: theme.transitions.easing.easeInOut,
+            }),
+        },
       }}
       transitionDuration={400}
       SlideProps={{
         appear: true,
-        direction: "left"
+        direction: "left",
       }}
     >
       <Fade in={open} timeout={600}>
         <Box sx={{ p: 3 }}>
-          <Box sx={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center',
-            mb: 3 
-          }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              mb: 3,
+            }}
+          >
             <Typography variant="h6">{title}</Typography>
             <IconButton onClick={onClose} size="small">
               <X />
@@ -90,7 +92,7 @@ export function PresenterForm({
                   label="First Name"
                   error={!!errors.firstName}
                   helperText={errors.firstName?.message}
-                  {...register('firstName')}
+                  {...register("firstName")}
                   fullWidth
                 />
                 <TextField
@@ -98,7 +100,7 @@ export function PresenterForm({
                   label="Last Name"
                   error={!!errors.lastName}
                   helperText={errors.lastName?.message}
-                  {...register('lastName')}
+                  {...register("lastName")}
                   fullWidth
                 />
                 <TextField
@@ -106,7 +108,7 @@ export function PresenterForm({
                   label="Email"
                   error={!!errors.email}
                   helperText={errors.email?.message}
-                  {...register('email')}
+                  {...register("email")}
                   fullWidth
                 />
                 <TextField
@@ -114,7 +116,7 @@ export function PresenterForm({
                   label="Phone"
                   error={!!errors.phone}
                   helperText={errors.phone?.message}
-                  {...register('phone')}
+                  {...register("phone")}
                   fullWidth
                 />
                 <TextField
@@ -122,7 +124,7 @@ export function PresenterForm({
                   label="Organization"
                   error={!!errors.organization}
                   helperText={errors.organization?.message}
-                  {...register('organization')}
+                  {...register("organization")}
                   fullWidth
                 />
                 <TextField
@@ -131,20 +133,20 @@ export function PresenterForm({
                   label="Status"
                   error={!!errors.status}
                   helperText={errors.status?.message}
-                  {...register('status')}
+                  {...register("status")}
                   fullWidth
                 >
                   <MenuItem value="active">Active</MenuItem>
                   <MenuItem value="inactive">Inactive</MenuItem>
                 </TextField>
 
-                <Button 
-                  variant="contained" 
+                <Button
+                  variant="contained"
                   type="submit"
                   disabled={isSubmitting}
                   fullWidth
                 >
-                  {isSubmitting ? 'Saving...' : 'Save'}
+                  {isSubmitting ? "Saving..." : "Save"}
                 </Button>
               </Stack>
             </form>

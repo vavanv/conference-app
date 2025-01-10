@@ -1,20 +1,26 @@
-import React, { useState } from 'react';
-import { Box } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
-import { Attendance, AttendanceFormData } from '../../types/attendance';
-import AttendanceForm from './AttendanceForm';
-import { ConfirmDialog } from '../common/ConfirmDialog';
-import { useAppSelector, useAppDispatch } from '../../hooks/redux';
-import { addAttendance, updateAttendance, deleteAttendance } from '../../store/slices/attendanceSlice';
-import { getAttendanceColumns } from './columns';
-import { CustomGridToolbar } from '../common/CustomGridToolbar';
+import { useState } from "react";
+import { Box } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
+import { Attendance, AttendanceFormData } from "../../types/attendance";
+import AttendanceForm from "./AttendanceForm";
+import { ConfirmDialog } from "../common/ConfirmDialog";
+import { useAppSelector, useAppDispatch } from "../../hooks/redux";
+import {
+  addAttendance,
+  updateAttendance,
+  deleteAttendance,
+} from "../../store/slices/attendanceSlice";
+import { getAttendanceColumns } from "./columns";
+import { CustomGridToolbar } from "../common/CustomGridToolbar";
 
 export default function AttendanceGrid() {
   const dispatch = useAppDispatch();
-  const attendance = useAppSelector(state => state.attendance.items);
+  const attendance = useAppSelector((state) => state.attendance.items);
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [editAttendance, setEditAttendance] = useState<Attendance | null>(null);
-  const [deleteAttendanceId, setDeleteAttendanceId] = useState<string | null>(null);
+  const [deleteAttendanceId, setDeleteAttendanceId] = useState<string | null>(
+    null
+  );
   const [paginationModel, setPaginationModel] = useState({
     pageSize: 25,
     page: 0,
@@ -48,22 +54,31 @@ export default function AttendanceGrid() {
   };
 
   const columns = getAttendanceColumns(handleEdit, handleDeleteClick);
-  const attendanceToDelete = attendance.find(a => a.id === deleteAttendanceId);
+  const attendanceToDelete = attendance.find(
+    (a) => a.id === deleteAttendanceId
+  );
 
   return (
-    <Box sx={{ 
-      display: 'flex', 
-      flexDirection: 'column',
-      height: 'calc(100vh - 140px)'
-    }}>      
-      <Box sx={{ flex: 1, width: '100%', overflow: 'hidden' }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "calc(100vh - 170px)",
+        backgroundColor: "background.paper",
+      }}
+    >
+      <Box sx={{ flex: 1, width: "100%", overflow: "hidden" }}>
         <DataGrid
           rows={attendance}
           columns={columns}
           density="compact"
           components={{
             Toolbar: (props) => (
-              <CustomGridToolbar {...props} onAdd={() => setIsAddOpen(true)} addButtonText="Add Attendance" />
+              <CustomGridToolbar
+                {...props}
+                onAdd={() => setIsAddOpen(true)}
+                addButtonText="Add Attendance"
+              />
             ),
           }}
           paginationModel={paginationModel}
@@ -71,17 +86,17 @@ export default function AttendanceGrid() {
           pageSizeOptions={[10, 25, 50]}
           disableRowSelectionOnClick
           sx={{
-            height: '100%',
-            border: 'none',
-            '& .MuiDataGrid-cell': {
-              borderColor: 'divider',
+            height: "100%",
+            border: "none",
+            "& .MuiDataGrid-cell": {
+              borderColor: "divider",
             },
-            '& .MuiDataGrid-columnHeaders': {
-              bgcolor: 'background.default',
-              borderColor: 'divider',
+            "& .MuiDataGrid-columnHeaders": {
+              bgcolor: "background.default",
+              borderColor: "divider",
             },
-            '& .MuiDataGrid-footerContainer': {
-              borderColor: 'divider',
+            "& .MuiDataGrid-footerContainer": {
+              borderColor: "divider",
             },
           }}
         />
@@ -107,7 +122,11 @@ export default function AttendanceGrid() {
       <ConfirmDialog
         open={!!deleteAttendanceId}
         title="Delete Attendance"
-        message={attendanceToDelete ? `Are you sure you want to delete attendance record for ${attendanceToDelete.employeeName}?` : ''}
+        message={
+          attendanceToDelete
+            ? `Are you sure you want to delete attendance record for ${attendanceToDelete.employeeName}?`
+            : ""
+        }
         confirmLabel="Delete"
         onConfirm={handleDeleteConfirm}
         onCancel={() => setDeleteAttendanceId(null)}

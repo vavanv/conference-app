@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Drawer,
   Box,
@@ -9,13 +8,13 @@ import {
   MenuItem,
   IconButton,
   Fade,
-  Slide
-} from '@mui/material';
-import { X } from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { organizationSchema } from '../../schemas/organization';
-import { OrganizationFormData } from '../../types/organization';
+  Slide,
+} from "@mui/material";
+import { X } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { organizationSchema } from "../../schemas/organization";
+import { OrganizationFormData } from "../../types/organization";
 
 interface OrganizationFormProps {
   open: boolean;
@@ -25,21 +24,21 @@ interface OrganizationFormProps {
   title: string;
 }
 
-export function OrganizationForm({ 
-  open, 
-  onClose, 
-  onSubmit, 
-  initialData, 
-  title 
+export function OrganizationForm({
+  open,
+  onClose,
+  onSubmit,
+  initialData,
+  title,
 }: OrganizationFormProps) {
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting }
+    formState: { errors, isSubmitting },
   } = useForm<OrganizationFormData>({
     resolver: yupResolver(organizationSchema),
-    defaultValues: initialData
+    defaultValues: initialData,
   });
 
   const handleFormSubmit = (data: OrganizationFormData) => {
@@ -54,28 +53,31 @@ export function OrganizationForm({
       open={open}
       onClose={onClose}
       PaperProps={{
-        sx: { 
-          width: { xs: '100%', sm: 400 },
-          transition: (theme) => theme.transitions.create(['transform'], {
-            duration: theme.transitions.duration.standard,
-            easing: theme.transitions.easing.easeInOut,
-          })
-        }
+        sx: {
+          width: { xs: "100%", sm: 400 },
+          transition: (theme) =>
+            theme.transitions.create(["transform"], {
+              duration: theme.transitions.duration.standard,
+              easing: theme.transitions.easing.easeInOut,
+            }),
+        },
       }}
       transitionDuration={400}
       SlideProps={{
         appear: true,
-        direction: "left"
+        direction: "left",
       }}
     >
       <Fade in={open} timeout={600}>
         <Box sx={{ p: 3 }}>
-          <Box sx={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center',
-            mb: 3 
-          }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              mb: 3,
+            }}
+          >
             <Typography variant="h6">{title}</Typography>
             <IconButton onClick={onClose} size="small">
               <X />
@@ -90,7 +92,7 @@ export function OrganizationForm({
                   label="Name"
                   error={!!errors.name}
                   helperText={errors.name?.message}
-                  {...register('name')}
+                  {...register("name")}
                   fullWidth
                 />
                 <TextField
@@ -99,7 +101,7 @@ export function OrganizationForm({
                   label="Type"
                   error={!!errors.type}
                   helperText={errors.type?.message}
-                  {...register('type')}
+                  {...register("type")}
                   fullWidth
                 >
                   <MenuItem value="Corporate">Corporate</MenuItem>
@@ -113,7 +115,7 @@ export function OrganizationForm({
                   label="Contact Email"
                   error={!!errors.contactEmail}
                   helperText={errors.contactEmail?.message}
-                  {...register('contactEmail')}
+                  {...register("contactEmail")}
                   fullWidth
                 />
                 <TextField
@@ -121,7 +123,7 @@ export function OrganizationForm({
                   label="Phone"
                   error={!!errors.phone}
                   helperText={errors.phone?.message}
-                  {...register('phone')}
+                  {...register("phone")}
                   fullWidth
                 />
                 <TextField
@@ -129,7 +131,7 @@ export function OrganizationForm({
                   label="Address"
                   error={!!errors.address}
                   helperText={errors.address?.message}
-                  {...register('address')}
+                  {...register("address")}
                   fullWidth
                 />
                 <TextField
@@ -138,20 +140,20 @@ export function OrganizationForm({
                   label="Status"
                   error={!!errors.status}
                   helperText={errors.status?.message}
-                  {...register('status')}
+                  {...register("status")}
                   fullWidth
                 >
                   <MenuItem value="active">Active</MenuItem>
                   <MenuItem value="inactive">Inactive</MenuItem>
                 </TextField>
 
-                <Button 
-                  variant="contained" 
+                <Button
+                  variant="contained"
                   type="submit"
                   disabled={isSubmitting}
                   fullWidth
                 >
-                  {isSubmitting ? 'Saving...' : 'Save'}
+                  {isSubmitting ? "Saving..." : "Save"}
                 </Button>
               </Stack>
             </form>
