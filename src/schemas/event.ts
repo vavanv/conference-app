@@ -11,7 +11,7 @@ export const eventSchema = yup.object({
     .required('Start date is required'),
   endDate: yup.string()
     .required('End date is required')
-    .test(
+    .test( 
       'is-after-start',
       'End date must be after start date',
       function(value) {

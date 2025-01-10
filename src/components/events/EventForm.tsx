@@ -56,7 +56,7 @@ export function EventForm({
       description: "",
       startDate: "",
       endDate: "",
-      locations: [],
+      locations: "",
       organizer: "",
       status: "scheduled",
       organizationId: "",

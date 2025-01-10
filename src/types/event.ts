@@ -5,7 +5,7 @@ export interface Event {
   description: string;
   startDate: string;
   endDate: string;
-  locations: string[]; // Changed to array of locations
+  locations: string; // Changed to array of locations
   organizer: string;
   status: 'scheduled' | 'ongoing' | 'completed' | 'cancelled';
 }
