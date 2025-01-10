@@ -56,7 +56,7 @@ export function EventForm({
       description: "",
       startDate: "",
       endDate: "",
-      locations: "",
+      location: "",
       organizer: "",
       status: "scheduled",
       organizationId: "",
@@ -76,7 +76,7 @@ export function EventForm({
       onClose={onClose}
       PaperProps={{
         sx: {
-          width: { xs: "100%", sm: 400 },
+          width: { xs: "100%", sm: 500 },
           transition: (theme) =>
             theme.transitions.create(["transform"], {
               duration: theme.transitions.duration.standard,
@@ -180,7 +180,7 @@ export function EventForm({
                 />
 
                 <Controller
-                  name="locations"
+                  name="location"
                   control={control}
                   render={({ field }) => (
                     <TextField
@@ -189,12 +189,12 @@ export function EventForm({
                       select
                       label="Locations"
                       SelectProps={{
-                        multiple: true,
+                        multiple: false,
                         value: field.value || [],
                         onChange: (e) => field.onChange(e.target.value),
                       }}
-                      error={!!errors.locations}
-                      helperText={errors.locations?.message}
+                      error={!!errors.location}
+                      helperText={errors.location?.message}
                       fullWidth
                     >
                       {allLocations.map((location) => (

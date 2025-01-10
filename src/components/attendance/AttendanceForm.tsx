@@ -62,7 +62,7 @@ export default function AttendanceForm({
       onClose={onClose}
       PaperProps={{
         sx: {
-          width: { xs: "100%", sm: 400 },
+          width: { xs: "100%", sm: 500 },
           transition: (theme) =>
             theme.transitions.create(["transform"], {
               duration: theme.transitions.duration.standard,

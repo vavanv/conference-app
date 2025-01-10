@@ -5,9 +5,9 @@ export interface Event {
   description: string;
   startDate: string;
   endDate: string;
-  locations: string; // Changed to array of locations
+  location: string;
   organizer: string;
-  status: 'scheduled' | 'ongoing' | 'completed' | 'cancelled';
+  status: "scheduled" | "ongoing" | "completed" | "cancelled";
 }
 
-export interface EventFormData extends Omit<Event, 'id'> {}
+export interface EventFormData extends Omit<Event, "id"> {}

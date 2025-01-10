@@ -1,33 +1,33 @@
-import { useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { accountSchema, AccountFormData } from '../schemas/account';
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { accountSchema, AccountFormData } from "../schemas/account";
 
 export function useAccount() {
   const [showPassword, setShowPassword] = useState(false);
-  
-  const { 
+
+  const {
     control,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm<AccountFormData>({
     resolver: yupResolver(accountSchema),
     defaultValues: {
-      firstName: '',
-      lastName: '',
-      username: '',
-      password: '',
-      accountType: 'user' // Default to user
-    }
+      firstName: "",
+      lastName: "",
+      username: "",
+      password: "",
+      accountType: "admin", // Default to admin
+    },
   });
 
   const togglePasswordVisibility = () => {
-    setShowPassword(prev => !prev);
+    setShowPassword((prev) => !prev);
   };
 
   const onSubmit = (data: AccountFormData) => {
-    console.log('Form data:', data);
+    console.log("Form data:", data);
     // Add your form submission logic here
     // Example: API call to update account
   };
@@ -39,6 +39,6 @@ export function useAccount() {
     handleSubmit,
     onSubmit,
     togglePasswordVisibility,
-    reset
+    reset,
   };
 }
