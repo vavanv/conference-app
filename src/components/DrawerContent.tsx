@@ -54,49 +54,45 @@ export default function DrawerContent({
         sx={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "flex-end",
+          justifyContent: "space-between",
           minHeight: 48,
           px: [1],
+          borderBottom: '1px solid',
+          borderColor: 'divider',
         }}
       >
-        <IconButton onClick={toggleDrawer} size="small">
-          {isDrawerOpen ? (
-            <ChevronLeft size={18} />
-          ) : (
-            <ChevronRight size={18} />
-          )}
-        </IconButton>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <IconButton onClick={toggleDrawer} size="small">
+            {isDrawerOpen ? (
+              <ChevronLeft size={18} />
+            ) : (
+              <ChevronRight size={18} />
+            )}
+          </IconButton>
+          <Box>
+            <Typography 
+              variant="h6" 
+              sx={{ 
+                fontWeight: 700,
+                color: theme.palette.primary.main,
+                lineHeight: 1.2
+              }}
+            >
+              ConffM
+            </Typography>
+            <Typography 
+              variant="caption" 
+              sx={{ 
+                color: 'text.secondary',
+                fontSize: '0.7rem',
+                lineHeight: 1.2
+              }}
+            >
+              Conference Management
+            </Typography>
+          </Box>
+        </Box>
       </Toolbar>
-
-      {/* Added spans for ConffM and Conference Management */}
-      <Box sx={{ 
-        px: 2, 
-        py: 1.5,
-        borderBottom: '1px solid',
-        borderColor: 'divider',
-        mb: 1
-      }}>
-        <Typography 
-          variant="h6" 
-          sx={{ 
-            fontWeight: 700,
-            color: theme.palette.primary.main,
-            lineHeight: 1.2
-          }}
-        >
-          ConffM
-        </Typography>
-        <Typography 
-          variant="caption" 
-          sx={{ 
-            color: 'text.secondary',
-            fontSize: '0.7rem',
-            lineHeight: 1.2
-          }}
-        >
-          Conference Management
-        </Typography>
-      </Box>
 
       <List sx={{ flex: "1 1 auto", overflowY: "auto", py: 0.5 }}>
         {menuItems.map((item) => (
