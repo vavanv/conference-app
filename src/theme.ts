@@ -15,7 +15,7 @@ const darkTheme = createTheme({
     },
     background: {
       default: '#1f2937',
-      paper: '#1f2937',
+      paper: '#303A47', // Changed from previous value
     },
     text: {
       primary: '#ffffff',
@@ -32,7 +32,7 @@ const darkTheme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: '#111827', // Updated AppBar color
+          backgroundColor: '#111827',
         },
       },
     },
@@ -55,7 +55,7 @@ const darkTheme = createTheme({
       styleOverrides: {
         root: {
           '&.MuiBottomControl-root': {
-            backgroundColor: '#111827', // BottomControl background color
+            backgroundColor: '#111827',
             borderTop: '1px solid #374151',
           },
         },

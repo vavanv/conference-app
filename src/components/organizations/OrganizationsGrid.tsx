@@ -54,7 +54,9 @@ export function OrganizationsGrid() {
     <Box sx={{ 
       display: 'flex', 
       flexDirection: 'column',
-      height: 'calc(100vh - 140px)'
+      height: 'calc(100vh - 140px)',
+      borderRadius: 1,
+      p: 1
     }}>      
       <Box sx={{ flex: 1, width: '100%', overflow: 'hidden' }}>
         <DataGrid
