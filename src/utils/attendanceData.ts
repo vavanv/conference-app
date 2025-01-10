@@ -1,7 +1,22 @@
-// Update generateInitialAttendance to include email
+import { Attendance } from '../types/attendance';
+import { generateInitialEmployees } from './employeesData';
+
+const statuses = ['present', 'absent', 'late', 'leave'];
+
+function getRandomElement<T>(array: T[]): T {
+  return array[Math.floor(Math.random() * array.length)];
+}
+
+function generateRandomTime(startHour: number, endHour: number): string {
+  const hour = Math.floor(Math.random() * (endHour - startHour)) + startHour;
+  const minute = Math.floor(Math.random() * 60);
+  return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+}
+
 export function generateInitialAttendance(): Attendance[] {
   const attendance: Attendance[] = [];
   const now = new Date();
+  const employees = generateInitialEmployees(); // Generate employees
   
   for (let i = 0; i < 100; i++) {
     const employee = getRandomElement(employees);
