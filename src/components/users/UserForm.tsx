@@ -1,4 +1,4 @@
-import React from 'react'; // Add this import
+import React from 'react';
 import {
   Drawer,
   Box,
@@ -103,6 +103,7 @@ export default function UserForm({
           <Slide direction="left" in={open} timeout={500}>
             <form onSubmit={handleSubmit(handleFormSubmit)}>
               <Stack spacing={3}>
+                {/* Existing fields */}
                 <Controller
                   name="firstName"
                   control={control}
@@ -143,6 +144,37 @@ export default function UserForm({
                       label="Username"
                       error={!!errors.username}
                       helperText={errors.username?.message}
+                      fullWidth
+                    />
+                  )}
+                />
+
+                <Controller
+                  name="email"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      size="small"
+                      label="Email"
+                      type="email"
+                      error={!!errors.email}
+                      helperText={errors.email?.message}
+                      fullWidth
+                    />
+                  )}
+                />
+
+                <Controller
+                  name="phone"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      size="small"
+                      label="Phone"
+                      error={!!errors.phone}
+                      helperText={errors.phone?.message}
                       fullWidth
                     />
                   )}
@@ -206,7 +238,45 @@ export default function UserForm({
                   )}
                 />
 
-                {/* Rest of the form fields */}
+                <Controller
+                  name="role"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      select
+                      size="small"
+                      label="Role"
+                      error={!!errors.role}
+                      helperText={errors.role?.message}
+                      fullWidth
+                    >
+                      <MenuItem value="admin">Admin</MenuItem>
+                      <MenuItem value="presenter">Presenter</MenuItem>
+                      <MenuItem value="attendee">Attendee</MenuItem>
+                    </TextField>
+                  )}
+                />
+
+                <Controller
+                  name="status"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      select
+                      size="small"
+                      label="Status"
+                      error={!!errors.status}
+                      helperText={errors.status?.message}
+                      fullWidth
+                    >
+                      <MenuItem value="active">Active</MenuItem>
+                      <MenuItem value="inactive">Inactive</MenuItem>
+                    </TextField>
+                  )}
+                />
+
                 <Button
                   variant="contained"
                   type="submit"
