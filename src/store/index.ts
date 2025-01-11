@@ -5,6 +5,7 @@ import eventsReducer from "./slices/eventsSlice";
 import attendanceReducer from "./slices/attendanceSlice";
 import presentersReducer from "./slices/presentersSlice";
 import organizationsReducer from "./slices/organizationsSlice";
+import usersReducer from "./slices/usersSlice"; // Add this import
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     attendance: attendanceReducer,
     presenters: presentersReducer,
     organizations: organizationsReducer,
+    users: usersReducer, // Add users reducer
   },
 });
 
