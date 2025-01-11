@@ -103,7 +103,7 @@ export default function UserForm({
           <Slide direction="left" in={open} timeout={500}>
             <form onSubmit={handleSubmit(handleFormSubmit)}>
               <Stack spacing={3}>
-                {/* Existing fields */}
+                {/* Personal Information */}
                 <Controller
                   name="firstName"
                   control={control}
@@ -135,21 +135,6 @@ export default function UserForm({
                 />
 
                 <Controller
-                  name="username"
-                  control={control}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      size="small"
-                      label="Username"
-                      error={!!errors.username}
-                      helperText={errors.username?.message}
-                      fullWidth
-                    />
-                  )}
-                />
-
-                <Controller
                   name="email"
                   control={control}
                   render={({ field }) => (
@@ -175,6 +160,62 @@ export default function UserForm({
                       label="Phone"
                       error={!!errors.phone}
                       helperText={errors.phone?.message}
+                      fullWidth
+                    />
+                  )}
+                />
+
+                {/* Role and Status */}
+                <Controller
+                  name="role"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      select
+                      size="small"
+                      label="Role"
+                      error={!!errors.role}
+                      helperText={errors.role?.message}
+                      fullWidth
+                    >
+                      <MenuItem value="admin">Admin</MenuItem>
+                      <MenuItem value="presenter">Presenter</MenuItem>
+                      <MenuItem value="attendee">Attendee</MenuItem>
+                    </TextField>
+                  )}
+                />
+
+                <Controller
+                  name="status"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      select
+                      size="small"
+                      label="Status"
+                      error={!!errors.status}
+                      helperText={errors.status?.message}
+                      fullWidth
+                    >
+                      <MenuItem value="active">Active</MenuItem>
+                      <MenuItem value="inactive">Inactive</MenuItem>
+                    </TextField>
+                  )}
+                />
+
+                {/* Authentication Information */}
+                <Controller
+                  name="username"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      size="small"
+                      label="Username"
+                      error={!!errors.username}
+                      helperText={errors.username?.message}
                       fullWidth
                     />
                   )}
@@ -235,45 +276,6 @@ export default function UserForm({
                         ),
                       }}
                     />
-                  )}
-                />
-
-                <Controller
-                  name="role"
-                  control={control}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      select
-                      size="small"
-                      label="Role"
-                      error={!!errors.role}
-                      helperText={errors.role?.message}
-                      fullWidth
-                    >
-                      <MenuItem value="admin">Admin</MenuItem>
-                      <MenuItem value="presenter">Presenter</MenuItem>
-                      <MenuItem value="attendee">Attendee</MenuItem>
-                    </TextField>
-                  )}
-                />
-
-                <Controller
-                  name="status"
-                  control={control}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      select
-                      size="small"
-                      label="Status"
-                      error={!!errors.status}
-                      helperText={errors.status?.message}
-                      fullWidth
-                    >
-                      <MenuItem value="active">Active</MenuItem>
-                      <MenuItem value="inactive">Inactive</MenuItem>
-                    </TextField>
                   )}
                 />
 
