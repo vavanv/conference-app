@@ -18,11 +18,11 @@ import { User } from '../types/user';
 
     export function generateInitialUsers(): User[] {
       const users: User[] = [];
-      
+
       for (let i = 0; i < 50; i++) {
         const firstName = getRandomElement(firstNames);
         const lastName = getRandomElement(lastNames);
-        
+
         users.push({
           id: crypto.randomUUID(),
           firstName,
@@ -33,6 +33,6 @@ import { User } from '../types/user';
           status: Math.random() > 0.2 ? 'active' : 'inactive'
         });
       }
-      
+
       return users;
     }
